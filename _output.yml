@@ -4,7 +4,12 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Osburn Lab Protocols</a></li>
+        <li>
+
+        <a href="./">
+        <img class="logo" src="images/LabLogo_White-01.png" height="50">
+        </a>
+        </li>
         <li class="social">
         <a target="blank" href="https://github.com/osburnlab" class="icon fa-github"></a>
         <a target="blank" href="https://twitter.com/osburnlab" class="icon fa-twitter"></a>

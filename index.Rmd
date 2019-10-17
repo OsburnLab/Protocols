@@ -19,7 +19,7 @@ description: "This is a collection of protocols for the Osburn Lab."
 
 This is a collection of protocols for the Osburn Lab `r emo::ji("sunglasses")`
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.cap='Osburn Lab Spring 2019'}
 knitr::include_graphics("images/IMG_4550.JPG")
 ```
 

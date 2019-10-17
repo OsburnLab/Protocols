@@ -13,6 +13,8 @@ p code {
   background-color: #333 !important;
   display: block;
   border-radius: 5px;
+  margin-top: 12px;
+  margin-bottom: 24px;
 }
 
 pre code {
@@ -58,6 +60,9 @@ code span.kw {
 code span.st {
   color: #fca369;
 }
+code span.co {
+  color: #92d192;
+}
 
 .book .book-body .page-wrapper .page-inner section.normal a {
   color: #62cfcf;
@@ -84,6 +89,7 @@ code span.st {
 			display: none;
 		}
 
-.social {
-  display: inline !important;
+.logo {
+  box-shadow: none;
+  margin-left: 10px;
 }
