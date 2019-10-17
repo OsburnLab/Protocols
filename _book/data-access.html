@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 2 | Data Access + Storage | Osburn Lab Protocols</title>
+  <meta name="description" content="This is a collection of protocols for the Osburn Lab." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 2 | Data Access + Storage | Osburn Lab Protocols" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a collection of protocols for the Osburn Lab." />
+  <meta name="github-repo" content="rstudio/osburnlab/protocols" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 2 | Data Access + Storage | Osburn Lab Protocols" />
+  
+  <meta name="twitter:description" content="This is a collection of protocols for the Osburn Lab." />
+  
+
+<meta name="author" content="By Caitlin Casar" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Osburn Lab Protocols</a></li>
+<li class="social">
+<a target="blank" href="https://github.com/osburnlab" class="icon fa-github"></a>
+<a target="blank" href="https://twitter.com/osburnlab" class="icon fa-twitter"></a>
+</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> | About</a></li>
+<li class="chapter" data-level="2" data-path="data-access.html"><a href="data-access.html"><i class="fa fa-check"></i><b>2</b> | Data Access + Storage</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-access.html"><a href="data-access.html#macos-users"><i class="fa fa-check"></i><b>2.1</b> MacOS Users</a></li>
+<li class="chapter" data-level="2.2" data-path="data-access.html"><a href="data-access.html#windows-users"><i class="fa fa-check"></i><b>2.2</b> Windows Users</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Osburn Lab Protocols</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-access" class="section level1">
+<h1><span class="header-section-number"> 2</span> | Data Access + Storage</h1>
+<p>The Osburn Lab data is backed up to <a href="https://www.it.northwestern.edu/research/user-services/storage/research-data.htm">RDSS</a> at Northwestern. You can access this data if you have permissions using the directions here. If you do not currently have access, you will need to be added as a user by Caitlin or Maggie.</p>
+<div id="macos-users" class="section level2">
+<h2><span class="header-section-number">2.1</span> MacOS Users</h2>
+<p>Open Finder and navigate to Go &gt; Connect to Server…</p>
+<p><img src="images/rdss-1.png" width="552" /></p>
+<p>Add this server address: <a href="smb://resfiles.northwestern.edu/OSBURN_LAB" class="uri">smb://resfiles.northwestern.edu/OSBURN_LAB</a></p>
+<p><img src="images/rdss-2.png" width="506" /></p>
+<p>Add your netID and password. Finder will automatically open OSBURNLAB in your system Volumes.</p>
+<p><img src="images/rdss-3.png" width="720" /></p>
+<p>To navigate to the OSBURNLAB dirctory in your terminal:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">cd</span> /Volumes/OSBURN_LAB</a></code></pre></div>
+</div>
+<div id="windows-users" class="section level2">
+<h2><span class="header-section-number">2.2</span> Windows Users</h2>
+<p>Open windows file explorer (not the web browser) by double clicking the computer desktop icon</p>
+<p><img src="images/rdss-4.png" width="47" /></p>
+<p>Add this server address: resfiles.northwestern.edu/OSBURN_LAB</p>
+<p><img src="images/rdss-5.png" width="627" /></p>
+<p>The contents of OSBURNLAB is displayed in the window.
+<img src="images/rdss-6.png" width="627" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/OsburnLab/Protocols/edit/master/01-data-access.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
