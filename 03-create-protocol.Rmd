@@ -1,0 +1,58 @@
+# | Create a Protocol
+
+Wanna share a cool protocol with your lab mates in this bookdown document? Follow this guide to learn how! 
+
+First, you'll need to clone this repository using Git in your terminal.
+```{bash, eval=FALSE}
+#change directories to a desirable location
+cd ~/Desktop
+git clone https://github.com/OsburnLab/Protocols
+```
+
+Next, open the bookdown-demo.Rproj file in RStudio. Then, select File > New File > R Markdown...
+
+Give this file a name in the format 'number-name.Rmd', where number is in sequential order with the other .Rmd files.
+
+Add an H1 element chapter title to the file.
+```{r, eval=FALSE}
+# | Chapter Title
+```
+
+Next, add some paragraph content below this.
+```{r, eval=FALSE}
+# | Chapter Title
+Here is some paragraph content.
+```
+
+To add a code chunk, equations, or figures, check out this [link](https://bookdown.org/yihui/bookdown/components.html).
+
+When you're done editing the R markdown file, render the book.
+```{r, eval=FALSE}
+bookdown::render_book("index.rmd", "bookdown::gitbook")
+```
+
+Now it's time to update your changes online!
+```{bash, eval=FALSE}
+#change directories to the protocols folder
+cd ~/Desktop/Protocols
+
+#add all new files you created
+git add.
+
+#commit all of your changes and add a short description about your update
+git commit -a -m "short description here"
+
+#push your changes to the github server
+git push
+
+#pull your changes onto the OSBURNLAB drive
+cd /Volumes/OSBURNLAB/Protocols
+git pull
+
+#update the rendered html file on the github-hosted page
+cd _book
+git add .
+git commit -a -m "short description here"
+git push
+```
+
