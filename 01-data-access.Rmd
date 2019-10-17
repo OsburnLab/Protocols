@@ -1,4 +1,5 @@
 # | Data Access + Storage {#data-access}
+**Created:** 2019-10-16 
 
 The Osburn Lab data is backed up to [RDSS](https://www.it.northwestern.edu/research/user-services/storage/research-data.htm) at Northwestern. You can access this data if you have permissions using the directions here. If you do not currently have access, you will need to be added as a user by Caitlin or Maggie. 
 
@@ -23,7 +24,7 @@ knitr::include_graphics("images/rdss-3.png")
 ```
 
 To navigate to the OSBURNLAB dirctory in your terminal:
-```{bash}
+```{bash, eval=FALSE}
 cd /Volumes/OSBURN_LAB
 ```
 
