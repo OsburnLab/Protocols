@@ -164,37 +164,37 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 <h1><span class="header-section-number"> 4</span> | Create a Protocol</h1>
 <p>Wanna share a cool protocol with your lab mates in this bookdown document? Follow this guide to learn how!</p>
 <p>First, you’ll need to clone this repository using Git in your terminal.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="co">#change directories to a desirable location</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="bu">cd</span> ~/Desktop</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="fu">git</span> clone https://github.com/OsburnLab/Protocols</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="co">#change directories to a desirable location</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="bu">cd</span> ~/Desktop</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="fu">git</span> clone https://github.com/OsburnLab/Protocols</a></code></pre></div>
 <p>Next, open the bookdown-demo.Rproj file in RStudio. Then, select File &gt; New File &gt; R Markdown…</p>
 <p>Give this file a name in the format ‘number-name.Rmd’, where number is in sequential order with the other .Rmd files.</p>
 <p>Add an H1 element chapter title to the file.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># | Chapter Title</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># | Chapter Title</span></a></code></pre></div>
 <p>Next, add some paragraph content below this.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># | Chapter Title</span></a>
-<a class="sourceLine" id="cb4-2" title="2">Here is some paragraph content.</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># | Chapter Title</span></a>
+<a class="sourceLine" id="cb7-2" title="2">Here is some paragraph content.</a></code></pre></div>
 <p>To add a code chunk, equations, or figures, check out this <a href="https://bookdown.org/yihui/bookdown/components.html">link</a>.</p>
 <p>When you’re done editing the R markdown file, render the book.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)</a></code></pre></div>
 <p>Now it’s time to update your changes online!</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="co">#change directories to the protocols folder</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="bu">cd</span> ~/Desktop/Protocols</a>
-<a class="sourceLine" id="cb6-3" title="3"></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co">#add all new files you created</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="fu">git</span> add.</a>
-<a class="sourceLine" id="cb6-6" title="6"></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#commit all of your changes and add a short description about your update</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="fu">git</span> commit -a -m <span class="st">&quot;short description here&quot;</span></a>
-<a class="sourceLine" id="cb6-9" title="9"></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">#push your changes to the github server</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="fu">git</span> push</a>
-<a class="sourceLine" id="cb6-12" title="12"></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">#update the rendered html file on the github-hosted page</span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="bu">cd</span> _book</a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="fu">git</span> add .</a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="fu">git</span> commit -a -m <span class="st">&quot;short description here&quot;</span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="fu">git</span> push</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="co">#change directories to the protocols folder</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="bu">cd</span> ~/Desktop/Protocols</a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co">#add all new files you created</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="fu">git</span> add.</a>
+<a class="sourceLine" id="cb9-6" title="6"></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#commit all of your changes and add a short description about your update</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="fu">git</span> commit -a -m <span class="st">&quot;short description here&quot;</span></a>
+<a class="sourceLine" id="cb9-9" title="9"></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="co">#push your changes to the github server</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="fu">git</span> push</a>
+<a class="sourceLine" id="cb9-12" title="12"></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="co">#update the rendered html file on the github-hosted page</span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="bu">cd</span> _book</a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="fu">git</span> add .</a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="fu">git</span> commit -a -m <span class="st">&quot;short description here&quot;</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="fu">git</span> push</a></code></pre></div>
 
 </div>
             </section>

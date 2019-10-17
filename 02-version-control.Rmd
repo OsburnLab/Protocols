@@ -1,3 +1,57 @@
 # | Version Control {#version-control}
 
 If you're writing code, it's very important to implement version control with Git. This guide will get you started!
+
+
+First you'll need to [install Git](https://www.linode.com/docs/development/version-control/how-to-install-git-on-linux-mac-and-windows/).
+
+Next, create an account on [Github](https://github.com). If you want access to provate repositories (i.e. if you need to backup unpublished data or code), be sure to set up a student account.
+
+Now, you'll need to set your credentials in Git. Open up your terminal.
+```{bash, eval=FALSE}
+#set your user name on github
+git config --global user.name "John Doe"
+
+#set your user email on github
+git config --global user.email johndoe@example.com
+```
+
+Now, go to Github and create a repository for your code. 
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/git-1.png")
+```
+
+
+If you want this repository to be private, change the repo settings on Githib. Click on the settings button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/git-2.png")
+```
+
+Then set the reposotory to private.
+```{r, echo=FALSE}
+knitr::include_graphics("images/git-3.png")
+```
+
+Then clone this repository to your computer. You may be prompted to enter your Github password.
+```{bash, eval=FALSE}
+#change directories to the desired location for your repository
+cd ~/Desktop
+
+#clone your repository using the URL 
+git clone https://github.com/OsburnLab/Protocols
+```
+
+Now you can add your code files to this cloned repository. When you're done editing your code, push it up to the Github server.
+
+```{bash, eval=FALSE}
+#add your new files to the queue
+git add .
+
+#commit your changes and add a short description
+git commit -a -m "short description here"
+
+#push your changes to the Github server
+git push 
+```
+
