@@ -91,5 +91,13 @@ code span.co {
 
 .logo {
   box-shadow: none;
-  margin-left: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom:5px;
+}
+
+li.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
