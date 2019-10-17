@@ -2,7 +2,7 @@
 
 Wanna share a cool protocol with your lab mates in this bookdown document? Follow this guide to learn how! 
 
-First, you'll need to clone this repository using Git in your terminal.
+First, you'll need to clone this repository using Git in your terminal. 
 ```{bash, eval=FALSE}
 #change directories to a desirable location
 cd ~/Desktop
@@ -44,10 +44,6 @@ git commit -a -m "short description here"
 
 #push your changes to the github server
 git push
-
-#pull your changes onto the OSBURNLAB drive
-cd /Volumes/OSBURNLAB/Protocols
-git pull
 
 #update the rendered html file on the github-hosted page
 cd _book
