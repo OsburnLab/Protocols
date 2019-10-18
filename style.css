@@ -49,6 +49,10 @@ img {
   color: #62cfcf;
 }
 
+.book .book-summary {
+  background: #4f4f4f;
+}
+
 .book .book-summary ul.summary li.divider {
   background: #4f4f4f;
 }
