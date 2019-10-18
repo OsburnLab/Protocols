@@ -30,16 +30,16 @@ cd /Volumes/OSBURN_LAB
 
 ## Windows Users
 
-Open windows file explorer (not the web browser) by double clicking the computer desktop icon
+Open windows file explore and add this server address: resfiles.northwestern.edu
 
 ```{r, echo=FALSE}
 knitr::include_graphics("images/rdss-4.png")
 ```
 
-Add this server address: resfiles.northwestern.edu/OSBURN_LAB
 
+You will be prompted for your user name (netID) and password. 
 ```{r, echo=FALSE}
-knitr::include_graphics("images/rdss-5.png")
+knitr::include_graphics("images/rdss-5.jpg")
 ```
 
 
