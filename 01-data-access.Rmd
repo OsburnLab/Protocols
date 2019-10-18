@@ -39,7 +39,7 @@ knitr::include_graphics("images/rdss-4.png")
 
 You will be prompted for your user name (netID) and password. 
 ```{r, echo=FALSE}
-knitr::include_graphics("images/rdss-5.jpg")
+knitr::include_graphics("images/rdss-5.png")
 ```
 
 
