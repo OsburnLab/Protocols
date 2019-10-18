@@ -50,7 +50,8 @@ img {
 }
 
 .book .book-summary {
-  background: #4f4f4f;
+  background: #333;
+  width:  250px;
 }
 
 .book .book-summary ul.summary li.divider {
