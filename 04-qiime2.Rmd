@@ -2,9 +2,9 @@
 **Created:** 2019-11-19
 **Created by:** Matt Selensky
 
-## Workflow for 16S amplicon sequence analysis in Qiime2
+<h2>Workflow for 16S amplicon sequence analysis in Qiime2</h2>
 
-### 1. Import data
+## Import data
 
 This protocol is designed for the processing of 16S rRNA gene amplicon data using 515F/806R primers. Qiime2 requires us to convert the raw data the sequencing center sends us into Qiime-zipped artifacts, or a ```.qza``` extension. We must first import our data (paired-end .fastq files) into this format:
 
@@ -19,7 +19,7 @@ The above function requires three .fastq files. One for the forward reads, one f
 
 ```qiime tools import``` will yield a single output, ```emp-paired-end-sequences.qza```, that will contain all of the barcoded reads from every single sample submitted to the sequencing center.
 
-### 2. Demultiplexing
+## Demultiplexing
 
 At the sequencing center, DNA sequences were given a barcode specific to each sample so we can track which sample our reads in the ```emp-paired-end-sequences.qza``` file originated from. We do this by *demultiplexing* our sequences.
 
@@ -47,7 +47,7 @@ qiime demux summarize
 
 From the interactive quality plot in ```demux.qzv```, we can see the distribution of quality scores for each sequenced base. If analyzing paired-end data, you will see two plots: one for the forward read, and one for the reverse read. We use this visualization to inform how we will trim and truncate the ends of the reads in the next denoising step using ```dada2 denoise-paired```
 
-### 3. Denoising
+## Denoising
 
 We will use the [DADA2](https://www.ncbi.nlm.nih.gov/pubmed/27214047) algorithm to denoise our data. DADA2 is a robust way to filter out noisy sequences, correct errors in marginal sequences, remove chimeras, remove singletons, join denoised paired-end reads, *and* dereplicate sequences. Previously, each of these functions would require separate commands, but DADA2 does it all-in-one. Therefore, this is a particularly computationally intense process. One should consider running ```dada2``` on a computer that can handle it (perhaps by accessing Northwestern's high-performance computing cluster, [Quest](https://www.it.northwestern.edu/research/user-services/quest/)).
 
@@ -67,7 +67,7 @@ By inspecting the interactive ```demux.qzv``` file produced in the previous step
 
 The output ```rep-seqs.qza``` will be used in the next step of our processing workflow.
 
-### 4. Clustering
+## Clustering
 
 Now that we have our squeaky-clean reads, we will want to cluster them into operational taxonomic units (OTUs). We cluster our OTUs *de novo*. This means that we compare our sequences to each other (i.e., not against a reference database) to determine how they should be clustered. *De novo* OTU clustering requires more computational resources than reference-based clustering, but it has been shown to be generally more robust. An OTU is defined by some sequence homology cutoff (usually 97%). In other words, if using a 97% cutoff, reads are considered to be coming from the same OTU if at least 97% of their sequences are the same. 
 
@@ -80,7 +80,7 @@ qiime vsearch cluster-features-de-novo
   --o-clustered-sequences rep-seqs-dn-97.qza
 ```
 
-### 5. Taxonomy
+## Taxonomy
 
 At this point, our OTUs lack any meaningful identification - we don't know whether OTU 'A' comes from the bacterium *E. coli* or the archaeum *S. solfataricus*! We determine who is present in our samples by assigning taxonomic IDs to each "query" sequence (from ```rep-seqs.qza```). We do this by comparing query sequences to a database of known reference sequences ( [Silva](https://www.arb-silva.de/documentation/silva-taxonomy/) is an excellent choice for our purposes). A major advantage of using Qiime2 is that it contains the ```classify-sklearn``` algorithm, which uses machine learning via Naive Bayes to classify sequences. As is the case with other machine learning applications, the classifier must be *trained*. Classifier training is required for every new reference database/amplicon pair, and would be the most resource-intensive step in our workflow by far. Luckily for us, Silva is routinely used to classify sequences coming from 16S rRNA gene amplification using the 515F/806R primers, and the Qiime2 developers provide a free, [pre-trained Silva classifier](https://docs.qiime2.org/2019.10/data-resources/) in their documentation for just that! Download this classifier - you will need it! At the time this was written, I used ```silva-132-99-515-806-nb-classifier-2018.qza```, the latest version of the pre-trained Silva classifier.
 
@@ -101,7 +101,7 @@ qiime metadata tabulate
   --o-visualization taxonomy.qzv
 ```
 
-### 6. Taxa barplots and diversity analyses in Qiime2
+## Taxa barplots and diversity analyses in Qiime2
 
 You can quickly visualize the community composition of your samples via the ```taxa barplot``` command. This requires your clustered feature table and taxonomy.qza from the previous step as inputs. In the [Qiime 2 viewer](https://view.qiime2.org/), you can export the data that feeds the taxa barplot as .csv files specific to each level of taxonomic classification. Use those files in R to produce publication-quality figures. 
 

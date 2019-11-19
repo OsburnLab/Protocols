@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 6 | Quest tutorial | Osburn Lab Protocols</title>
+  <meta name="description" content="This is a collection of protocols for the Osburn Lab." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 6 | Quest tutorial | Osburn Lab Protocols" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a collection of protocols for the Osburn Lab." />
+  <meta name="github-repo" content="rstudio/osburnlab/protocols" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 6 | Quest tutorial | Osburn Lab Protocols" />
+  
+  <meta name="twitter:description" content="This is a collection of protocols for the Osburn Lab." />
+  
+
+<meta name="author" content="By Caitlin Casar" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="qiime2-workflow.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li>
+
+<a href="./">
+<img class="logo" src="images/LabLogo_White-01.png" height="50">
+</a>
+</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> | About</a></li>
+<li class="chapter" data-level="2" data-path="data-access.html"><a href="data-access.html"><i class="fa fa-check"></i><b>2</b> | Data Access + Storage</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-access.html"><a href="data-access.html#macos-users"><i class="fa fa-check"></i><b>2.1</b> MacOS Users</a></li>
+<li class="chapter" data-level="2.2" data-path="data-access.html"><a href="data-access.html#windows-users"><i class="fa fa-check"></i><b>2.2</b> Windows Users</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>3</b> | Version Control</a></li>
+<li class="chapter" data-level="4" data-path="create-a-protocol.html"><a href="create-a-protocol.html"><i class="fa fa-check"></i><b>4</b> | Create a Protocol</a></li>
+<li class="chapter" data-level="5" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html"><i class="fa fa-check"></i><b>5</b> | Qiime2 workflow</a><ul>
+<li class="chapter" data-level="5.1" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#import-data"><i class="fa fa-check"></i><b>5.1</b> Import data</a></li>
+<li class="chapter" data-level="5.2" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#demultiplexing"><i class="fa fa-check"></i><b>5.2</b> Demultiplexing</a></li>
+<li class="chapter" data-level="5.3" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#denoising"><i class="fa fa-check"></i><b>5.3</b> Denoising</a></li>
+<li class="chapter" data-level="5.4" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#clustering"><i class="fa fa-check"></i><b>5.4</b> Clustering</a></li>
+<li class="chapter" data-level="5.5" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#taxonomy"><i class="fa fa-check"></i><b>5.5</b> Taxonomy</a></li>
+<li class="chapter" data-level="5.6" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#taxa-barplots-and-diversity-analyses-in-qiime2"><i class="fa fa-check"></i><b>5.6</b> Taxa barplots and diversity analyses in Qiime2</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="quest-tutorial.html"><a href="quest-tutorial.html"><i class="fa fa-check"></i><b>6</b> | Quest tutorial</a><ul>
+<li class="chapter" data-level="6.1" data-path="quest-tutorial.html"><a href="quest-tutorial.html#getting-acquainted-with-quest"><i class="fa fa-check"></i><b>6.1</b> Getting acquainted with Quest</a></li>
+<li class="chapter" data-level="6.2" data-path="quest-tutorial.html"><a href="quest-tutorial.html#using-qiime2-on-quest"><i class="fa fa-check"></i><b>6.2</b> Using Qiime2 on Quest</a></li>
+<li class="chapter" data-level="6.3" data-path="quest-tutorial.html"><a href="quest-tutorial.html#best-practices-in-a-shared-computing-environment"><i class="fa fa-check"></i><b>6.3</b> Best practices in a shared computing environment</a></li>
+<li class="chapter" data-level="6.4" data-path="quest-tutorial.html"><a href="quest-tutorial.html#interactive-jobs-on-quest"><i class="fa fa-check"></i><b>6.4</b> Interactive jobs on Quest</a></li>
+<li class="chapter" data-level="6.5" data-path="quest-tutorial.html"><a href="quest-tutorial.html#batch-jobs-on-quest"><i class="fa fa-check"></i><b>6.5</b> Batch jobs on Quest</a></li>
+<li class="chapter" data-level="6.6" data-path="quest-tutorial.html"><a href="quest-tutorial.html#a-note-on-partitions"><i class="fa fa-check"></i><b>6.6</b> A note on partitions</a></li>
+<li class="chapter" data-level="6.7" data-path="quest-tutorial.html"><a href="quest-tutorial.html#more-information"><i class="fa fa-check"></i><b>6.7</b> More information</a></li>
+</ul></li>
+<li class="divider"></li>
+<li class="social">
+<a target="blank" href="https://github.com/osburnlab" class="icon fa-github"></a>
+<a target="blank" href="https://twitter.com/osburnlab" class="icon fa-twitter"></a>
+</li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Osburn Lab Protocols</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="quest-tutorial" class="section level1">
+<h1><span class="header-section-number"> 6</span> | Quest tutorial</h1>
+<p><strong>Created:</strong> 2019-11-19
+<strong>Created by:</strong> Matt Selensky</p>
+<h2>
+Getting an allocation on Quest
+</h2>
+<p>You may find that you are unable to process the large volume of sequencing data on your personal computer. Thankfully, Northwestern IT offers free access to its high-performance computing cluster, <a href="https://www.it.northwestern.edu/research/user-services/quest/">Quest</a>, to students, postdocs, and faculty. To use Quest, you first need to apply for an allocation granted by IT. Please visit <a href="https://www.it.northwestern.edu/research/user-services/quest/allocation-guidelines.html">this webpage</a> to learn more about the application process.</p>
+<div id="getting-acquainted-with-quest" class="section level2">
+<h2><span class="header-section-number">6.1</span> Getting acquainted with Quest</h2>
+<p>Once you obtain an allocation, you can start using Quest for any manner of processing needs. Quest is remotely accessed from your personal computer by way of a secure shell in the command line. If you use Windows, download <a href="https://gitforwindows.org/">GitBASH</a> to be able to interact with the Unix command line in Quest. Note - this is not necessary if you use Mac or *nix.</p>
+<p>Before logging in to Quest, I recommend downloading <a href="https://cyberduck.io/">Cyberduck</a>, a FTP/SFTP client that makes transferring files between your personal computer and Quest much easier. See <a href="https://kb.northwestern.edu/internal/70521">this page</a> for instructions on how to correctly download and install Cyberduck.</p>
+<p>To log in to Quest, enter the following into the command line (or GitBASH):</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" title="1">ssh <span class="op">-</span>X <span class="op">&lt;</span>netid<span class="op">&gt;@</span>quest.it.northwestern.edu</a></code></pre></div>
+<p>You will be prompted to enter your password (don’t worry, it is normal to not see the characters as you type!).</p>
+<p>In the command line, you can navigate Quest via Unix commands. For example, use <code>cd ..</code> to move up the file directory, then <code>cd /projects/&lt;allocation-id&gt;</code> to enter your project directory. Your project allocation ID will be a unique string given to you by Northwestern IT. It should be noted that your home directory (<code>/home/&lt;net-id&gt;</code>) is regularly backed up (up to 80 GB), but your project directory is not.</p>
+</div>
+<div id="using-qiime2-on-quest" class="section level2">
+<h2><span class="header-section-number">6.2</span> Using Qiime2 on Quest</h2>
+<p>The Qiime2 software is currently available as a Docker image on the DockerHub (version 2018.8). On Quest, you can download this image via <a href="https://kb.northwestern.edu/using-singularity-on-quest">Singularity</a>. Navigate to your project directory on Quest and run the following command:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" title="1">singularity pull <span class="op">--</span>name qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg docker:<span class="op">//</span>qiime2<span class="op">/</span>core:<span class="fl">2018.8</span></a></code></pre></div>
+<p>This will install Qiime2 in the folder you’re currently in (which is hopefully your project directory). To use Qiime2, you will have to call the Singularity container in which it resides (<code>/projects/&lt;allocation-id&gt;/qiime2-core2018-8.simg</code>) every time you run a Qiime2 command. Let’s check if it correctly installed by running a help command:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" title="1">singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
+<p>If you received a bunch of “help” text as an output, congratulations, Qiime2 installed correctly and is ready to be used! Before you do anything, let’s lay some ground rules first.</p>
+</div>
+<div id="best-practices-in-a-shared-computing-environment" class="section level2">
+<h2><span class="header-section-number">6.3</span> Best practices in a shared computing environment</h2>
+<p>Quest is used by hundreds of people on campus doing Very Important Things, so following a few guidelines is in all of our best interests. First and foremost, <strong>never ever</strong> move or delete files in any folder that isn’t yours. IT <em>will</em> find out about it, and you <em>will</em> be hearing from them if you do (and rightly so).</p>
+<p>With that out of the way, feel free to store files in your home and/or project directories. Though your project directory likely has more storage, your home directory is regularly backed-up (up to 80GB). I recommend storing programming scripts or other such files in your home directory for this reason.</p>
+<p>In Quest, you shouldn’t ever run jobs on the main head node or login node. This will slow Quest’s performance for everyone. You should instead submit every script as “interactive” or “batch” jobs on designated compute nodes, following standard Slurm commands.</p>
+</div>
+<div id="interactive-jobs-on-quest" class="section level2">
+<h2><span class="header-section-number">6.4</span> Interactive jobs on Quest</h2>
+<p>Interactive jobs are best used for short jobs. If you submit an interactive job, your command line will be tied up for the time it takes to process your submission. If you exit the command line, your job submission will be terminated.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" title="1">srun <span class="op">--</span>account<span class="op">=&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;</span> <span class="op">--</span>time<span class="op">=&lt;</span>hh:mm:ss<span class="op">&gt;</span> <span class="op">--</span>partition<span class="op">=&lt;</span>queue_name<span class="op">&gt;</span> <span class="op">--</span>mem<span class="op">=&lt;</span>memory per node<span class="op">&gt;</span>G <span class="op">--</span>pty bash <span class="op">-</span>l</a></code></pre></div>
+<p>Append the above command to the beginning of your command. Running the same <code>qiime --help</code> command above in an interactive job command will look something like:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" title="1">module load singularity</a>
+<a class="sourceLine" id="cb27-2" title="2"></a>
+<a class="sourceLine" id="cb27-3" title="3">srun <span class="op">--</span>account<span class="op">=</span>a12345 <span class="op">--</span>time<span class="op">=</span><span class="dv">01</span>:<span class="dv">00</span>:<span class="dv">00</span> <span class="op">--</span>partition<span class="op">=</span>short <span class="op">--</span>mem<span class="op">=</span>18G <span class="op">--</span>pty bash <span class="op">-</span>l singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
+</div>
+<div id="batch-jobs-on-quest" class="section level2">
+<h2><span class="header-section-number">6.5</span> Batch jobs on Quest</h2>
+<p>It is generally more efficient to submit scripts on Quest as batch jobs. This allows you to disconnect from Quest without prematurely stopping your submission. This is helpful if you have multi-day commands such as classifier training using <code>sklearn</code> in Qiime2!</p>
+<p>A batch job submission script should have the following structure (save it with a .sh file extension and upload it to Quest). To run the same help command, write the following script and save it with a .sh file extension:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" title="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="co">#SBATCH -A a12345               # Allocation</span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="co">#SBATCH -p short                # Queue</span></a>
+<a class="sourceLine" id="cb28-4" title="4"><span class="co">#SBATCH -t 04:00:00             # Walltime/duration of the job</span></a>
+<a class="sourceLine" id="cb28-5" title="5"><span class="co">#SBATCH -N 1                    # Number of Nodes</span></a>
+<a class="sourceLine" id="cb28-6" title="6"><span class="co">#SBATCH --mem=18G               # Memory per node in GB needed for a job. Also see --mem-per-cpu</span></a>
+<a class="sourceLine" id="cb28-7" title="7"><span class="co">#SBATCH --ntasks-per-node=6     # Number of Cores (Processors)</span></a>
+<a class="sourceLine" id="cb28-8" title="8"><span class="co">#SBATCH --mail-user=&lt;my_email&gt;  # Designate email address for job communications</span></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="co">#SBATCH --mail-type=&lt;event&gt;     # Events options are job </span><span class="re">BEGIN</span><span class="co">, </span><span class="re">END</span><span class="co">, NONE, FAIL, REQUEUE</span></a>
+<a class="sourceLine" id="cb28-10" title="10"><span class="co">#SBATCH --job-name=&quot;help&quot;       # Name of job</span></a>
+<a class="sourceLine" id="cb28-11" title="11"></a>
+<a class="sourceLine" id="cb28-12" title="12"><span class="co"># unload any modules that carried over from your command line session</span></a>
+<a class="sourceLine" id="cb28-13" title="13">module purge</a>
+<a class="sourceLine" id="cb28-14" title="14">module load singularity</a>
+<a class="sourceLine" id="cb28-15" title="15"></a>
+<a class="sourceLine" id="cb28-16" title="16">singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/</span>a12345<span class="op">/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
+<p>If this script is called <code>qiime2-help.sh</code>, simply navigate to the folder in Quest where it is stored and enter into the command line:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" title="1">sbatch qiime2<span class="op">-</span><span class="bu">help</span>.sh</a></code></pre></div>
+</div>
+<div id="a-note-on-partitions" class="section level2">
+<h2><span class="header-section-number">6.6</span> A note on partitions</h2>
+<p>Quest has several “partitions,” which are defined by how long you expect your job to take to run. Shorter jobs have shorter queues, so it would behoove you to choose the shortest partition as possible. Keep in mind, however, that your job will terminate if it runs past the time you alloted to it! Visit <a href="https://kb.northwestern.edu/quest-partitions-queues">this webpage</a> to learn about the different partitions and their associated maximum walltimes.</p>
+</div>
+<div id="more-information" class="section level2">
+<h2><span class="header-section-number">6.7</span> More information</h2>
+<p>For more information on Quest, visit the Quest <a href="https://kb.northwestern.edu/quest">User Guide</a>, which is excellently documented by Northwestern IT.</p>
+<p>Happy Questing!</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="qiime2-workflow.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/OsburnLab/Protocols/edit/master/05-quest-tutorial.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

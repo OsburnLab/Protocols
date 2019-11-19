@@ -2,11 +2,11 @@
 **Created:** 2019-11-19
 **Created by:** Matt Selensky
 
-### Getting an allocation on Quest
+<h2>Getting an allocation on Quest</h2>
 
 You may find that you are unable to process the large volume of sequencing data on your personal computer. Thankfully, Northwestern IT offers free access to its high-performance computing cluster, [Quest](https://www.it.northwestern.edu/research/user-services/quest/), to students, postdocs, and faculty. To use Quest, you first need to apply for an allocation granted by IT. Please visit [this webpage](https://www.it.northwestern.edu/research/user-services/quest/allocation-guidelines.html) to learn more about the application process.
 
-### Getting acquainted with Quest
+## Getting acquainted with Quest
 
 Once you obtain an allocation, you can start using Quest for any manner of processing needs. Quest is remotely accessed from your personal computer by way of a secure shell in the command line. If you use Windows, download [GitBASH](https://gitforwindows.org/) to be able to interact with the Unix command line in Quest. Note - this is not necessary if you use Mac or *nix.
 
@@ -22,7 +22,7 @@ You will be prompted to enter your password (don't worry, it is normal to not se
 
 In the command line, you can navigate Quest via Unix commands. For example, use ```cd ..``` to move up the file directory, then ```cd /projects/<allocation-id>``` to enter your project directory. Your project allocation ID will be a unique string given to you by Northwestern IT. It should be noted that your home directory (```/home/<net-id>```) is regularly backed up (up to 80 GB), but your project directory is not.
 
-### Using Qiime2 on Quest
+## Using Qiime2 on Quest
 
 The Qiime2 software is currently available as a Docker image on the DockerHub (version 2018.8). On Quest, you can download this image via [Singularity](https://kb.northwestern.edu/using-singularity-on-quest). Navigate to your project directory on Quest and run the following command:
 
@@ -38,7 +38,7 @@ singularity exec /projects/<allocation-id>/qiime2-core2018-8.simg qiime --help
 
 If you received a bunch of "help" text as an output, congratulations, Qiime2 installed correctly and is ready to be used! Before you do anything, let's lay some ground rules first.
 
-### Best practices in a shared computing environment
+## Best practices in a shared computing environment
 
 Quest is used by hundreds of people on campus doing Very Important Things, so following a few guidelines is in all of our best interests. First and foremost, **never ever** move or delete files in any folder that isn't yours. IT *will* find out about it, and you *will* be hearing from them if you do (and rightly so). 
 
@@ -46,7 +46,7 @@ With that out of the way, feel free to store files in your home and/or project d
 
 In Quest, you shouldn't ever run jobs on the main head node or login node. This will slow Quest's performance for everyone. You should instead submit every script as "interactive" or "batch" jobs on designated compute nodes, following standard Slurm commands. 
 
-### Interactive jobs on Quest
+## Interactive jobs on Quest
 
 Interactive jobs are best used for short jobs. If you submit an interactive job, your command line will be tied up for the time it takes to process your submission. If you exit the command line, your job submission will be terminated. 
 
@@ -62,7 +62,7 @@ module load singularity
 srun --account=a12345 --time=01:00:00 --partition=short --mem=18G --pty bash -l singularity exec /projects/<allocation-id>/qiime2-core2018-8.simg qiime --help
 ```
 
-### Batch jobs on Quest
+## Batch jobs on Quest
 
 It is generally more efficient to submit scripts on Quest as batch jobs. This allows you to disconnect from Quest without prematurely stopping your submission. This is helpful if you have multi-day commands such as classifier training using ```sklearn``` in Qiime2!
 
@@ -92,11 +92,11 @@ If this script is called ```qiime2-help.sh```, simply navigate to the folder in 
 sbatch qiime2-help.sh
 ```
 
-### A note on partitions
+## A note on partitions
 
 Quest has several "partitions," which are defined by how long you expect your job to take to run. Shorter jobs have shorter queues, so it would behoove you to choose the shortest partition as possible. Keep in mind, however, that your job will terminate if it runs past the time you alloted to it! Visit [this webpage](https://kb.northwestern.edu/quest-partitions-queues) to learn about the different partitions and their associated maximum walltimes.
 
-### More information
+## More information
 For more information on Quest, visit the Quest [User Guide](https://kb.northwestern.edu/quest), which is excellently documented by Northwestern IT.
 
 Happy Questing!
