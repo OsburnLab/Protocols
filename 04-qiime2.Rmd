@@ -1,12 +1,6 @@
 # | Qiime2 workflow
-**Created: 2019-11-19**
-**Created by: Matt Selensky**
-
-
-```{r setup, include=FALSE}
-library(reticulate)
-knitr::opts_chunk$set(echo = TRUE)
-```
+**Created:** 2019-11-19
+**Created by:** Matt Selensky
 
 ## Workflow for 16S amplicon sequence analysis in Qiime2
 

@@ -1,11 +1,6 @@
 # | Quest tutorial
-**Created: 2019-11-19**
-**Created by: Matt Selensky**
-
-```{r setup, include=FALSE}
-library(reticulate)
-knitr::opts_chunk$set(echo = TRUE)
-```
+**Created:** 2019-11-19
+**Created by:** Matt Selensky
 
 ### Getting an allocation on Quest
 
