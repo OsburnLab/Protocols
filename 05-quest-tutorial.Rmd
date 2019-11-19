@@ -1,0 +1,107 @@
+# | Quest tutorial
+**Created: 2019-11-19**
+**Created by: Matt Selensky**
+
+```{r setup, include=FALSE}
+library(reticulate)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Getting an allocation on Quest
+
+You may find that you are unable to process the large volume of sequencing data on your personal computer. Thankfully, Northwestern IT offers free access to its high-performance computing cluster, [Quest](https://www.it.northwestern.edu/research/user-services/quest/), to students, postdocs, and faculty. To use Quest, you first need to apply for an allocation granted by IT. Please visit [this webpage](https://www.it.northwestern.edu/research/user-services/quest/allocation-guidelines.html) to learn more about the application process.
+
+### Getting acquainted with Quest
+
+Once you obtain an allocation, you can start using Quest for any manner of processing needs. Quest is remotely accessed from your personal computer by way of a secure shell in the command line. If you use Windows, download [GitBASH](https://gitforwindows.org/) to be able to interact with the Unix command line in Quest. Note - this is not necessary if you use Mac or *nix.
+
+Before logging in to Quest, I recommend downloading [Cyberduck](https://cyberduck.io/), a FTP/SFTP client that makes transferring files between your personal computer and Quest much easier. See [this page](https://kb.northwestern.edu/internal/70521) for instructions on how to correctly download and install Cyberduck.
+
+To log in to Quest, enter the following into the command line (or GitBASH):
+
+```{python, echo=TRUE, eval=FALSE}
+ssh -X <netid>@quest.it.northwestern.edu
+```
+
+You will be prompted to enter your password (don't worry, it is normal to not see the characters as you type!).
+
+In the command line, you can navigate Quest via Unix commands. For example, use ```cd ..``` to move up the file directory, then ```cd /projects/<allocation-id>``` to enter your project directory. Your project allocation ID will be a unique string given to you by Northwestern IT. It should be noted that your home directory (```/home/<net-id>```) is regularly backed up (up to 80 GB), but your project directory is not.
+
+### Using Qiime2 on Quest
+
+The Qiime2 software is currently available as a Docker image on the DockerHub (version 2018.8). On Quest, you can download this image via [Singularity](https://kb.northwestern.edu/using-singularity-on-quest). Navigate to your project directory on Quest and run the following command:
+
+```{python, echo=TRUE, eval=FALSE}
+singularity pull --name qiime2-core2018-8.simg docker://qiime2/core:2018.8
+```
+
+This will install Qiime2 in the folder you're currently in (which is hopefully your project directory). To use Qiime2, you will have to call the Singularity container in which it resides (```/projects/<allocation-id>/qiime2-core2018-8.simg```) every time you run a Qiime2 command. Let's check if it correctly installed by running a help command:
+
+```{python, echo=TRUE, eval=FALSE}
+singularity exec /projects/<allocation-id>/qiime2-core2018-8.simg qiime --help
+```
+
+If you received a bunch of "help" text as an output, congratulations, Qiime2 installed correctly and is ready to be used! Before you do anything, let's lay some ground rules first.
+
+### Best practices in a shared computing environment
+
+Quest is used by hundreds of people on campus doing Very Important Things, so following a few guidelines is in all of our best interests. First and foremost, **never ever** move or delete files in any folder that isn't yours. IT *will* find out about it, and you *will* be hearing from them if you do (and rightly so). 
+
+With that out of the way, feel free to store files in your home and/or project directories. Though your project directory likely has more storage, your home directory is regularly backed-up (up to 80GB). I recommend storing programming scripts or other such files in your home directory for this reason.
+
+In Quest, you shouldn't ever run jobs on the main head node or login node. This will slow Quest's performance for everyone. You should instead submit every script as "interactive" or "batch" jobs on designated compute nodes, following standard Slurm commands. 
+
+### Interactive jobs on Quest
+
+Interactive jobs are best used for short jobs. If you submit an interactive job, your command line will be tied up for the time it takes to process your submission. If you exit the command line, your job submission will be terminated. 
+
+```{python, echo=TRUE, eval=FALSE}
+srun --account=<allocation-id> --time=<hh:mm:ss> --partition=<queue_name> --mem=<memory per node>G --pty bash -l
+```
+
+Append the above command to the beginning of your command. Running the same ```qiime --help``` command above in an interactive job command will look something like:
+
+```{python, echo=TRUE, eval=FALSE}
+module load singularity
+
+srun --account=a12345 --time=01:00:00 --partition=short --mem=18G --pty bash -l singularity exec /projects/<allocation-id>/qiime2-core2018-8.simg qiime --help
+```
+
+### Batch jobs on Quest
+
+It is generally more efficient to submit scripts on Quest as batch jobs. This allows you to disconnect from Quest without prematurely stopping your submission. This is helpful if you have multi-day commands such as classifier training using ```sklearn``` in Qiime2!
+
+A batch job submission script should have the following structure (save it with a .sh file extension and upload it to Quest). To run the same help command, write the following script and save it with a .sh file extension:
+
+```{python, echo=TRUE, eval=FALSE}
+#!/bin/bash
+#SBATCH -A a12345               # Allocation
+#SBATCH -p short                # Queue
+#SBATCH -t 04:00:00             # Walltime/duration of the job
+#SBATCH -N 1                    # Number of Nodes
+#SBATCH --mem=18G               # Memory per node in GB needed for a job. Also see --mem-per-cpu
+#SBATCH --ntasks-per-node=6     # Number of Cores (Processors)
+#SBATCH --mail-user=<my_email>  # Designate email address for job communications
+#SBATCH --mail-type=<event>     # Events options are job BEGIN, END, NONE, FAIL, REQUEUE
+#SBATCH --job-name="help"       # Name of job
+
+# unload any modules that carried over from your command line session
+module purge
+module load singularity
+
+singularity exec /projects/a12345/qiime2-core2018-8.simg qiime --help
+```
+
+If this script is called ```qiime2-help.sh```, simply navigate to the folder in Quest where it is stored and enter into the command line:
+```{python, echo=TRUE, eval=FALSE}
+sbatch qiime2-help.sh
+```
+
+### A note on partitions
+
+Quest has several "partitions," which are defined by how long you expect your job to take to run. Shorter jobs have shorter queues, so it would behoove you to choose the shortest partition as possible. Keep in mind, however, that your job will terminate if it runs past the time you alloted to it! Visit [this webpage](https://kb.northwestern.edu/quest-partitions-queues) to learn about the different partitions and their associated maximum walltimes.
+
+### More information
+For more information on Quest, visit the Quest [User Guide](https://kb.northwestern.edu/quest), which is excellently documented by Northwestern IT.
+
+Happy Questing!
