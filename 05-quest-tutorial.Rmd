@@ -1,5 +1,6 @@
 # | Quest tutorial
 **Created:** 2019-11-19
+**Last updated:** 2019-11-30
 **Created by:** Matt Selensky
 
 <h2>Getting an allocation on Quest</h2>
@@ -8,17 +9,17 @@ You may find that you are unable to process the large volume of sequencing data 
 
 ## Getting acquainted with Quest
 
-Once you obtain an allocation, you can start using Quest for any manner of processing needs. Quest is remotely accessed from your personal computer by way of a secure shell in the command line. If you use Windows, download [GitBASH](https://gitforwindows.org/) to be able to interact with the Unix command line in Quest. Note - this is not necessary if you use Mac or *nix.
+Once you obtain an allocation, you can start using Quest for any manner of processing needs. Quest is remotely accessed from your personal computer by way of a secure shell in the command line. If you use Windows, download [GitBASH](https://gitforwindows.org/) to be able to more easily interact with the Unix command line in Quest. Note - this is not necessary if you use Mac or *nix.
 
-Before logging in to Quest, I recommend downloading [Cyberduck](https://cyberduck.io/), a FTP/SFTP client that makes transferring files between your personal computer and Quest much easier. See [this page](https://kb.northwestern.edu/internal/70521) for instructions on how to correctly download and install Cyberduck.
+Before logging in to Quest, I recommend downloading [Cyberduck](https://cyberduck.io/), a FTP/SFTP client that facilitates the transfer of files between your personal computer and Quest. See [this page](https://kb.northwestern.edu/internal/70521) for instructions on how to correctly download and install Cyberduck.
 
 To log in to Quest, enter the following into the command line (or GitBASH):
 
 ```{python, echo=TRUE, eval=FALSE}
-ssh -X <netid>@quest.it.northwestern.edu
+ssh -X netid@quest.it.northwestern.edu
 ```
 
-You will be prompted to enter your password (don't worry, it is normal to not see the characters as you type!).
+You will be prompted to enter your netID password (don't worry, it is normal to not see the characters as you type!).
 
 In the command line, you can navigate Quest via Unix commands. For example, use ```cd ..``` to move up the file directory, then ```cd /projects/<allocation-id>``` to enter your project directory. Your project allocation ID will be a unique string given to you by Northwestern IT. It should be noted that your home directory (```/home/<net-id>```) is regularly backed up (up to 80 GB), but your project directory is not.
 
@@ -40,11 +41,11 @@ If you received a bunch of "help" text as an output, congratulations, Qiime2 ins
 
 ## Best practices in a shared computing environment
 
-Quest is used by hundreds of people on campus doing Very Important Things, so following a few guidelines is in all of our best interests. First and foremost, **never ever** move or delete files in any folder that isn't yours. IT *will* find out about it, and you *will* be hearing from them if you do (and rightly so). 
+Quest is used by hundreds of people on campus doing Very Important Things, so following a few guidelines is in all of our best interests. First and foremost **never ever** move or delete files in any folder that isn't yours that you somehow have access to. IT *will* find out about it, and you *will* be hearing from them if you do (and rightly so). 
 
 With that out of the way, feel free to store files in your home and/or project directories. Though your project directory likely has more storage, your home directory is regularly backed-up (up to 80GB). I recommend storing programming scripts or other such files in your home directory for this reason.
 
-In Quest, you shouldn't ever run jobs on the main head node or login node. This will slow Quest's performance for everyone. You should instead submit every script as "interactive" or "batch" jobs on designated compute nodes, following standard Slurm commands. 
+In Quest, you shouldn't ever run jobs on the main head node or login node. This will slow Quest's performance for everyone. You should instead submit every script as "interactive" or "batch" jobs on designated compute nodes, following standard [Slurm](https://slurm.schedmd.com/) commands. 
 
 ## Interactive jobs on Quest
 
@@ -54,12 +55,14 @@ Interactive jobs are best used for short jobs. If you submit an interactive job,
 srun --account=<allocation-id> --time=<hh:mm:ss> --partition=<queue_name> --mem=<memory per node>G --pty bash -l
 ```
 
-Append the above command to the beginning of your command. Running the same ```qiime --help``` command above in an interactive job command will look something like:
+Running the above command to will do several things. The ```--account``` argument should be your allocation ID, which helps IT "bill" the number of compute hours to the right project. ```--time``` specifies how long you would like to have a node from which you can submit jobs. ```--partition``` is defined by the requested amount of ```--time``` and is used to determine how long your allocation request will be queued (see below). Finally, ```--mem``` is the amount of memory requested for the job. Submitting ```srun``` will bring you to an "allocation queue," where you will eventually be given resources to run your Qiime2 commands. Running the same ```qiime --help``` command above in an interactive job command will look something like:
 
 ```{python, echo=TRUE, eval=FALSE}
 module load singularity
 
-srun --account=a12345 --time=01:00:00 --partition=short --mem=18G --pty bash -l singularity exec /projects/<allocation-id>/qiime2-core2018-8.simg qiime --help
+srun --account=a12345 --time=01:00:00 --partition=short --mem=18G --pty bash -l 
+
+singularity exec /projects/<allocation-id>/qiime2-core2018-8.simg qiime --help
 ```
 
 ## Batch jobs on Quest

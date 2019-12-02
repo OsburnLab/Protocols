@@ -142,10 +142,9 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 <li class="chapter" data-level="5" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html"><i class="fa fa-check"></i><b>5</b> | Qiime2 workflow</a><ul>
 <li class="chapter" data-level="5.1" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#import-data"><i class="fa fa-check"></i><b>5.1</b> Import data</a></li>
 <li class="chapter" data-level="5.2" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#demultiplexing"><i class="fa fa-check"></i><b>5.2</b> Demultiplexing</a></li>
-<li class="chapter" data-level="5.3" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#denoising"><i class="fa fa-check"></i><b>5.3</b> Denoising</a></li>
-<li class="chapter" data-level="5.4" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#clustering"><i class="fa fa-check"></i><b>5.4</b> Clustering</a></li>
-<li class="chapter" data-level="5.5" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#taxonomy"><i class="fa fa-check"></i><b>5.5</b> Taxonomy</a></li>
-<li class="chapter" data-level="5.6" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#taxa-barplots-and-diversity-analyses-in-qiime2"><i class="fa fa-check"></i><b>5.6</b> Taxa barplots and diversity analyses in Qiime2</a></li>
+<li class="chapter" data-level="5.3" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#denoising-and-asv-generation"><i class="fa fa-check"></i><b>5.3</b> Denoising and ASV generation</a></li>
+<li class="chapter" data-level="5.4" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#taxonomy"><i class="fa fa-check"></i><b>5.4</b> Taxonomy</a></li>
+<li class="chapter" data-level="5.5" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#taxa-barplots-and-diversity-analyses-in-qiime2"><i class="fa fa-check"></i><b>5.5</b> Taxa barplots and diversity analyses in Qiime2</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="quest-tutorial.html"><a href="quest-tutorial.html"><i class="fa fa-check"></i><b>6</b> | Quest tutorial</a><ul>
 <li class="chapter" data-level="6.1" data-path="quest-tutorial.html"><a href="quest-tutorial.html#getting-acquainted-with-quest"><i class="fa fa-check"></i><b>6.1</b> Getting acquainted with Quest</a></li>
@@ -182,6 +181,7 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 <div id="quest-tutorial" class="section level1">
 <h1><span class="header-section-number"> 6</span> | Quest tutorial</h1>
 <p><strong>Created:</strong> 2019-11-19
+<strong>Last updated:</strong> 2019-11-30
 <strong>Created by:</strong> Matt Selensky</p>
 <h2>
 Getting an allocation on Quest
@@ -189,58 +189,60 @@ Getting an allocation on Quest
 <p>You may find that you are unable to process the large volume of sequencing data on your personal computer. Thankfully, Northwestern IT offers free access to its high-performance computing cluster, <a href="https://www.it.northwestern.edu/research/user-services/quest/">Quest</a>, to students, postdocs, and faculty. To use Quest, you first need to apply for an allocation granted by IT. Please visit <a href="https://www.it.northwestern.edu/research/user-services/quest/allocation-guidelines.html">this webpage</a> to learn more about the application process.</p>
 <div id="getting-acquainted-with-quest" class="section level2">
 <h2><span class="header-section-number">6.1</span> Getting acquainted with Quest</h2>
-<p>Once you obtain an allocation, you can start using Quest for any manner of processing needs. Quest is remotely accessed from your personal computer by way of a secure shell in the command line. If you use Windows, download <a href="https://gitforwindows.org/">GitBASH</a> to be able to interact with the Unix command line in Quest. Note - this is not necessary if you use Mac or *nix.</p>
-<p>Before logging in to Quest, I recommend downloading <a href="https://cyberduck.io/">Cyberduck</a>, a FTP/SFTP client that makes transferring files between your personal computer and Quest much easier. See <a href="https://kb.northwestern.edu/internal/70521">this page</a> for instructions on how to correctly download and install Cyberduck.</p>
+<p>Once you obtain an allocation, you can start using Quest for any manner of processing needs. Quest is remotely accessed from your personal computer by way of a secure shell in the command line. If you use Windows, download <a href="https://gitforwindows.org/">GitBASH</a> to be able to more easily interact with the Unix command line in Quest. Note - this is not necessary if you use Mac or *nix.</p>
+<p>Before logging in to Quest, I recommend downloading <a href="https://cyberduck.io/">Cyberduck</a>, a FTP/SFTP client that facilitates the transfer of files between your personal computer and Quest. See <a href="https://kb.northwestern.edu/internal/70521">this page</a> for instructions on how to correctly download and install Cyberduck.</p>
 <p>To log in to Quest, enter the following into the command line (or GitBASH):</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" title="1">ssh <span class="op">-</span>X <span class="op">&lt;</span>netid<span class="op">&gt;@</span>quest.it.northwestern.edu</a></code></pre></div>
-<p>You will be prompted to enter your password (don’t worry, it is normal to not see the characters as you type!).</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" title="1">ssh <span class="op">-</span>X netid<span class="op">@</span>quest.it.northwestern.edu</a></code></pre></div>
+<p>You will be prompted to enter your netID password (don’t worry, it is normal to not see the characters as you type!).</p>
 <p>In the command line, you can navigate Quest via Unix commands. For example, use <code>cd ..</code> to move up the file directory, then <code>cd /projects/&lt;allocation-id&gt;</code> to enter your project directory. Your project allocation ID will be a unique string given to you by Northwestern IT. It should be noted that your home directory (<code>/home/&lt;net-id&gt;</code>) is regularly backed up (up to 80 GB), but your project directory is not.</p>
 </div>
 <div id="using-qiime2-on-quest" class="section level2">
 <h2><span class="header-section-number">6.2</span> Using Qiime2 on Quest</h2>
 <p>The Qiime2 software is currently available as a Docker image on the DockerHub (version 2018.8). On Quest, you can download this image via <a href="https://kb.northwestern.edu/using-singularity-on-quest">Singularity</a>. Navigate to your project directory on Quest and run the following command:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" title="1">singularity pull <span class="op">--</span>name qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg docker:<span class="op">//</span>qiime2<span class="op">/</span>core:<span class="fl">2018.8</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" title="1">singularity pull <span class="op">--</span>name qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg docker:<span class="op">//</span>qiime2<span class="op">/</span>core:<span class="fl">2018.8</span></a></code></pre></div>
 <p>This will install Qiime2 in the folder you’re currently in (which is hopefully your project directory). To use Qiime2, you will have to call the Singularity container in which it resides (<code>/projects/&lt;allocation-id&gt;/qiime2-core2018-8.simg</code>) every time you run a Qiime2 command. Let’s check if it correctly installed by running a help command:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" title="1">singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" title="1">singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
 <p>If you received a bunch of “help” text as an output, congratulations, Qiime2 installed correctly and is ready to be used! Before you do anything, let’s lay some ground rules first.</p>
 </div>
 <div id="best-practices-in-a-shared-computing-environment" class="section level2">
 <h2><span class="header-section-number">6.3</span> Best practices in a shared computing environment</h2>
-<p>Quest is used by hundreds of people on campus doing Very Important Things, so following a few guidelines is in all of our best interests. First and foremost, <strong>never ever</strong> move or delete files in any folder that isn’t yours. IT <em>will</em> find out about it, and you <em>will</em> be hearing from them if you do (and rightly so).</p>
+<p>Quest is used by hundreds of people on campus doing Very Important Things, so following a few guidelines is in all of our best interests. First and foremost <strong>never ever</strong> move or delete files in any folder that isn’t yours that you somehow have access to. IT <em>will</em> find out about it, and you <em>will</em> be hearing from them if you do (and rightly so).</p>
 <p>With that out of the way, feel free to store files in your home and/or project directories. Though your project directory likely has more storage, your home directory is regularly backed-up (up to 80GB). I recommend storing programming scripts or other such files in your home directory for this reason.</p>
-<p>In Quest, you shouldn’t ever run jobs on the main head node or login node. This will slow Quest’s performance for everyone. You should instead submit every script as “interactive” or “batch” jobs on designated compute nodes, following standard Slurm commands.</p>
+<p>In Quest, you shouldn’t ever run jobs on the main head node or login node. This will slow Quest’s performance for everyone. You should instead submit every script as “interactive” or “batch” jobs on designated compute nodes, following standard <a href="https://slurm.schedmd.com/">Slurm</a> commands.</p>
 </div>
 <div id="interactive-jobs-on-quest" class="section level2">
 <h2><span class="header-section-number">6.4</span> Interactive jobs on Quest</h2>
 <p>Interactive jobs are best used for short jobs. If you submit an interactive job, your command line will be tied up for the time it takes to process your submission. If you exit the command line, your job submission will be terminated.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" title="1">srun <span class="op">--</span>account<span class="op">=&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;</span> <span class="op">--</span>time<span class="op">=&lt;</span>hh:mm:ss<span class="op">&gt;</span> <span class="op">--</span>partition<span class="op">=&lt;</span>queue_name<span class="op">&gt;</span> <span class="op">--</span>mem<span class="op">=&lt;</span>memory per node<span class="op">&gt;</span>G <span class="op">--</span>pty bash <span class="op">-</span>l</a></code></pre></div>
-<p>Append the above command to the beginning of your command. Running the same <code>qiime --help</code> command above in an interactive job command will look something like:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" title="1">module load singularity</a>
-<a class="sourceLine" id="cb27-2" title="2"></a>
-<a class="sourceLine" id="cb27-3" title="3">srun <span class="op">--</span>account<span class="op">=</span>a12345 <span class="op">--</span>time<span class="op">=</span><span class="dv">01</span>:<span class="dv">00</span>:<span class="dv">00</span> <span class="op">--</span>partition<span class="op">=</span>short <span class="op">--</span>mem<span class="op">=</span>18G <span class="op">--</span>pty bash <span class="op">-</span>l singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" title="1">srun <span class="op">--</span>account<span class="op">=&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;</span> <span class="op">--</span>time<span class="op">=&lt;</span>hh:mm:ss<span class="op">&gt;</span> <span class="op">--</span>partition<span class="op">=&lt;</span>queue_name<span class="op">&gt;</span> <span class="op">--</span>mem<span class="op">=&lt;</span>memory per node<span class="op">&gt;</span>G <span class="op">--</span>pty bash <span class="op">-</span>l</a></code></pre></div>
+<p>Running the above command to will do several things. The <code>--account</code> argument should be your allocation ID, which helps IT “bill” the number of compute hours to the right project. <code>--time</code> specifies how long you would like to have a node from which you can submit jobs. <code>--partition</code> is defined by the requested amount of <code>--time</code> and is used to determine how long your allocation request will be queued (see below). Finally, <code>--mem</code> is the amount of memory requested for the job. Submitting <code>srun</code> will bring you to an “allocation queue,” where you will eventually be given resources to run your Qiime2 commands. Running the same <code>qiime --help</code> command above in an interactive job command will look something like:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" title="1">module load singularity</a>
+<a class="sourceLine" id="cb26-2" title="2"></a>
+<a class="sourceLine" id="cb26-3" title="3">srun <span class="op">--</span>account<span class="op">=</span>a12345 <span class="op">--</span>time<span class="op">=</span><span class="dv">01</span>:<span class="dv">00</span>:<span class="dv">00</span> <span class="op">--</span>partition<span class="op">=</span>short <span class="op">--</span>mem<span class="op">=</span>18G <span class="op">--</span>pty bash <span class="op">-</span>l </a>
+<a class="sourceLine" id="cb26-4" title="4"></a>
+<a class="sourceLine" id="cb26-5" title="5">singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/&lt;</span>allocation<span class="op">-</span><span class="bu">id</span><span class="op">&gt;/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
 </div>
 <div id="batch-jobs-on-quest" class="section level2">
 <h2><span class="header-section-number">6.5</span> Batch jobs on Quest</h2>
 <p>It is generally more efficient to submit scripts on Quest as batch jobs. This allows you to disconnect from Quest without prematurely stopping your submission. This is helpful if you have multi-day commands such as classifier training using <code>sklearn</code> in Qiime2!</p>
 <p>A batch job submission script should have the following structure (save it with a .sh file extension and upload it to Quest). To run the same help command, write the following script and save it with a .sh file extension:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" title="1"><span class="co">#!/bin/bash</span></a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="co">#SBATCH -A a12345               # Allocation</span></a>
-<a class="sourceLine" id="cb28-3" title="3"><span class="co">#SBATCH -p short                # Queue</span></a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="co">#SBATCH -t 04:00:00             # Walltime/duration of the job</span></a>
-<a class="sourceLine" id="cb28-5" title="5"><span class="co">#SBATCH -N 1                    # Number of Nodes</span></a>
-<a class="sourceLine" id="cb28-6" title="6"><span class="co">#SBATCH --mem=18G               # Memory per node in GB needed for a job. Also see --mem-per-cpu</span></a>
-<a class="sourceLine" id="cb28-7" title="7"><span class="co">#SBATCH --ntasks-per-node=6     # Number of Cores (Processors)</span></a>
-<a class="sourceLine" id="cb28-8" title="8"><span class="co">#SBATCH --mail-user=&lt;my_email&gt;  # Designate email address for job communications</span></a>
-<a class="sourceLine" id="cb28-9" title="9"><span class="co">#SBATCH --mail-type=&lt;event&gt;     # Events options are job </span><span class="re">BEGIN</span><span class="co">, </span><span class="re">END</span><span class="co">, NONE, FAIL, REQUEUE</span></a>
-<a class="sourceLine" id="cb28-10" title="10"><span class="co">#SBATCH --job-name=&quot;help&quot;       # Name of job</span></a>
-<a class="sourceLine" id="cb28-11" title="11"></a>
-<a class="sourceLine" id="cb28-12" title="12"><span class="co"># unload any modules that carried over from your command line session</span></a>
-<a class="sourceLine" id="cb28-13" title="13">module purge</a>
-<a class="sourceLine" id="cb28-14" title="14">module load singularity</a>
-<a class="sourceLine" id="cb28-15" title="15"></a>
-<a class="sourceLine" id="cb28-16" title="16">singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/</span>a12345<span class="op">/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" title="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="co">#SBATCH -A a12345               # Allocation</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="co">#SBATCH -p short                # Queue</span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="co">#SBATCH -t 04:00:00             # Walltime/duration of the job</span></a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="co">#SBATCH -N 1                    # Number of Nodes</span></a>
+<a class="sourceLine" id="cb27-6" title="6"><span class="co">#SBATCH --mem=18G               # Memory per node in GB needed for a job. Also see --mem-per-cpu</span></a>
+<a class="sourceLine" id="cb27-7" title="7"><span class="co">#SBATCH --ntasks-per-node=6     # Number of Cores (Processors)</span></a>
+<a class="sourceLine" id="cb27-8" title="8"><span class="co">#SBATCH --mail-user=&lt;my_email&gt;  # Designate email address for job communications</span></a>
+<a class="sourceLine" id="cb27-9" title="9"><span class="co">#SBATCH --mail-type=&lt;event&gt;     # Events options are job </span><span class="re">BEGIN</span><span class="co">, </span><span class="re">END</span><span class="co">, NONE, FAIL, REQUEUE</span></a>
+<a class="sourceLine" id="cb27-10" title="10"><span class="co">#SBATCH --job-name=&quot;help&quot;       # Name of job</span></a>
+<a class="sourceLine" id="cb27-11" title="11"></a>
+<a class="sourceLine" id="cb27-12" title="12"><span class="co"># unload any modules that carried over from your command line session</span></a>
+<a class="sourceLine" id="cb27-13" title="13">module purge</a>
+<a class="sourceLine" id="cb27-14" title="14">module load singularity</a>
+<a class="sourceLine" id="cb27-15" title="15"></a>
+<a class="sourceLine" id="cb27-16" title="16">singularity <span class="bu">exec</span> <span class="op">/</span>projects<span class="op">/</span>a12345<span class="op">/</span>qiime2<span class="op">-</span>core2018<span class="fl">-8.</span>simg qiime <span class="op">--</span><span class="bu">help</span></a></code></pre></div>
 <p>If this script is called <code>qiime2-help.sh</code>, simply navigate to the folder in Quest where it is stored and enter into the command line:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" title="1">sbatch qiime2<span class="op">-</span><span class="bu">help</span>.sh</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" title="1">sbatch qiime2<span class="op">-</span><span class="bu">help</span>.sh</a></code></pre></div>
 </div>
 <div id="a-note-on-partitions" class="section level2">
 <h2><span class="header-section-number">6.6</span> A note on partitions</h2>
