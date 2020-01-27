@@ -1,7 +1,6 @@
 # | Quest tutorial
-**Created:** 2019-11-19
-**Last updated:** 2019-11-30
-**Created by:** Matt Selensky
+<font size="1">**Created By:** Matt Selensky on 2019-11-19 </br>
+**Last updated:** 2019-11-30 </font>
 
 <h2>Getting an allocation on Quest</h2>
 

@@ -1,5 +1,6 @@
 # | Version Control {#version-control}
-**Created:** 2019-10-16 
+<font size="1">**Created by:** Caitlin Casar on 2019-10-16 </br>
+**Last updated:** 2019-10-16 </font>
 
 If you're writing code, it's very important to implement version control with Git. This guide will get you started!
 

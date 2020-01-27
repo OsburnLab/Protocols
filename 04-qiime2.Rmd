@@ -1,7 +1,7 @@
 # | Qiime2 workflow
-**Created:** 2019-11-19
-**Last updated:** 2019-11-30
-**Created by:** Matt Selensky
+<font size="1">**Created by:** Matt Selensky on 2019-11-19 </br>
+**Last updated:** 2019-11-30 </font>
+
 
 <h2>Workflow for 16S amplicon sequence analysis in Qiime2</h2>
 

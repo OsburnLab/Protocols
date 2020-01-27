@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 4 | Create a Protocol | Osburn Lab Protocols</title>
+  <title> 7 | DAPI + Cell Counting | Osburn Lab Protocols</title>
   <meta name="description" content="This is a collection of protocols for the Osburn Lab." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 4 | Create a Protocol | Osburn Lab Protocols" />
+  <meta property="og:title" content=" 7 | DAPI + Cell Counting | Osburn Lab Protocols" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/osburnlab/protocols" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 4 | Create a Protocol | Osburn Lab Protocols" />
+  <meta name="twitter:title" content=" 7 | DAPI + Cell Counting | Osburn Lab Protocols" />
   
   <meta name="twitter:description" content="This is a collection of protocols for the Osburn Lab." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="version-control.html"/>
-<link rel="next" href="qiime2-workflow.html"/>
+<link rel="prev" href="quest-tutorial.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -182,52 +182,148 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="create-a-protocol" class="section level1">
-<h1><span class="header-section-number"> 4</span> | Create a Protocol</h1>
-<p><font size="1"><strong>Created by:</strong> Caitlin Casar on 2019-10-16 </br>
-<strong>Last updated:</strong> 2019-10-16 </font></p>
-<p>Wanna share a cool protocol with your lab mates in this bookdown document? Follow this guide to learn how!</p>
-<p>First, you’ll need to clone this repository using Git in your terminal.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="co">#change directories to a desirable location</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="bu">cd</span> ~/Desktop</a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="fu">git</span> clone https://github.com/OsburnLab/Protocols</a></code></pre></div>
-<p>Next, open the bookdown-demo.Rproj file in RStudio. Then, select File &gt; New File &gt; R Markdown…</p>
-<p>Give this file a name in the format ‘number-name.Rmd’, where number is in sequential order with the other .Rmd files.</p>
-<p>Add an H1 element chapter title to the file.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># | Chapter Title</span></a></code></pre></div>
-<p>Next, add some paragraph content below this.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># | Chapter Title</span></a>
-<a class="sourceLine" id="cb7-2" title="2">Here is some paragraph content.</a></code></pre></div>
-<p>To add a code chunk, equations, or figures, check out this <a href="https://bookdown.org/yihui/bookdown/components.html">link</a>.</p>
-<p>When you’re done editing the R markdown file, render the book.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.rmd&quot;</span>, <span class="st">&quot;bookdown::gitbook&quot;</span>)</a></code></pre></div>
-<p>Now it’s time to update your changes online!</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="co">#change directories to the protocols folder</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="bu">cd</span> ~/Desktop/Protocols</a>
-<a class="sourceLine" id="cb9-3" title="3"></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co">#add all new files you created</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="fu">git</span> add.</a>
-<a class="sourceLine" id="cb9-6" title="6"></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#commit all of your changes and add a short description about your update</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="fu">git</span> commit -a -m <span class="st">&quot;short description here&quot;</span></a>
-<a class="sourceLine" id="cb9-9" title="9"></a>
-<a class="sourceLine" id="cb9-10" title="10"><span class="co">#push your changes to the github server</span></a>
-<a class="sourceLine" id="cb9-11" title="11"><span class="fu">git</span> push</a>
-<a class="sourceLine" id="cb9-12" title="12"></a>
-<a class="sourceLine" id="cb9-13" title="13"><span class="co">#update the rendered html file on the github-hosted page</span></a>
-<a class="sourceLine" id="cb9-14" title="14"><span class="bu">cd</span> _book</a>
-<a class="sourceLine" id="cb9-15" title="15"><span class="fu">git</span> add .</a>
-<a class="sourceLine" id="cb9-16" title="16"><span class="fu">git</span> commit -a -m <span class="st">&quot;short description here&quot;</span></a>
-<a class="sourceLine" id="cb9-17" title="17"><span class="fu">git</span> push</a></code></pre></div>
+<div id="DAPI" class="section level1">
+<h1><span class="header-section-number"> 7</span> | DAPI + Cell Counting</h1>
+<p><font size="1"><strong>Created By:</strong> Caitlin Casar on 2020-01-27 <br />
+<strong>Last updated:</strong> 2020-01-27 </font></p>
+<div id="sample-prep" class="section level2">
+<h2><span class="header-section-number">7.1</span> Sample prep</h2>
+<ol style="list-style-type: decimal">
+<li>Prepare your cells by fixation for 30 minutes at room temperature.
+<ul>
+<li>
+Add 0.1 ml 4% paraformaldehyde/PBS solution to a 2ml tube
+</li>
+<li>
+Add 0.9ml cell suspension
+</li>
+</ul></li>
+</ol>
+<ul>
+<div class="figure"><span id="fig:unnamed-chunk-39"></span>
+<img src="images/DAPI-1.png" alt="Fix your sample." width="250px" />
+<p class="caption">
+Figure 7.1: Fix your sample.
+</p>
+</div>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Use sterile foreceps to place a glass microfiber Whatman filter on the filter mount. Wet the filter with filtered DI water and vacuum so that it is damp.</p></li>
+<li><p>Use sterile forceps to place a polycarbonate Whatman filter on top of the glass microfiber filter. Wet the filter with filtered DI water and vacuum dry to flatten evenly. (Beware of the “taco” effect - the surface tension of the water on the polycarbonate filter may cause it to fold up on itself and it is very difficult to re-flatten).</p></li>
+<li><p>Place the filter column over the stack filters and clamp down.</p></li>
+<li><p>Add a few ml of filtered DI water to the column, then add your fixed cell suspension avoiding the sides of the column. The water helps to evenly disperse the cells across the filter. If you accidentally drop your cells on the side of the column, use filtered DI water to wash them down.</p>
+<ul>
+<div class="figure"><span id="fig:unnamed-chunk-40"></span>
+<img src="images/DAPI-2.png" alt="Add your sample to the filter column." width="250px" />
+<p class="caption">
+Figure 7.2: Add your sample to the filter column.
+</p>
+</div>
+</ul></li>
+<li><p>Vacuum the fluids through. Open the vacuum line on the flask before the next step or it may draw a vacuum and pull your dye through.</p>
+<ul>
+<div class="figure"><span id="fig:unnamed-chunk-41"></span>
+<img src="images/DAPI-3.png" alt="Vacuum your sample through the filter." width="250px" />
+<p class="caption">
+Figure 7.3: Vacuum your sample through the filter.
+</p>
+</div>
+</ul></li>
+<li><p>Dim the lights and close the curtain, DAPI is extremely photo-sensitive. Drip filtered DAPI down the side of the filter column so as not to disturb your cells on the filter. Add enough to completely cover the entire filter.</p>
+<ul>
+<div class="figure"><span id="fig:unnamed-chunk-42"></span>
+<img src="images/DAPI-4.png" alt="Dye your sample with DAPI." width="200px" />
+<p class="caption">
+Figure 7.4: Dye your sample with DAPI.
+</p>
+</div>
+</ul></li>
+<li><p>Set a timer for ten minutes. After the timer goes off, vacuum the dye to dry the filter.</p>
+<ul>
+<div class="figure"><span id="fig:unnamed-chunk-43"></span>
+<img src="images/DAPI-5.png" alt="Vacuum the dye through the filter." width="200px" />
+<p class="caption">
+Figure 7.5: Vacuum the dye through the filter.
+</p>
+</div>
+</ul></li>
+<li><p>Add a drop of immersion oil to a glass slide. Use sterile forceps to place the filter onto the drop of oil.</p></li>
+<li><p>Add a drop of immersion oil on top of the filter. Do not touch the filter with the oil dropper or it may contaminate the oil. Place a glass coverslip over the filter, taking care to push out the bubbles.</p>
+<ul>
+<div class="figure"><span id="fig:unnamed-chunk-44"></span>
+<img src="images/DAPI-6.png" alt="Prepare your slide." width="250px" />
+<p class="caption">
+Figure 7.6: Prepare your slide.
+</p>
+</div>
+</ul></li>
+<li><p>Add a drop of immersion oil to the top of the glass coverslip. You are now ready to place the slide on the microscope stage for use with the 100x oil objective.</p></li>
+</ol>
+</div>
+<div id="operating-the-microscope" class="section level2">
+<h2><span class="header-section-number">7.2</span> Operating the Microscope</h2>
+<ol style="list-style-type: decimal">
+<li><p>Remove the dust cover and turn on the power source, then power on the microscope.</p></li>
+<li><p>Power on the X-Cite lamp. Once the lamp is turned on, do not power off for at least 30 minutes.</p></li>
+<li><p>Open the Zen software. If you open the software before the microscope has been powered on, the software will try to communicate with the scope and get confused and will need to be rebooted.</p></li>
+<li><p>Turn on the DAPI RL (reflected light)</p></li>
+<li><p>Carefully lower the objective onto the drop of oil on your coverslip. When the objective makes contact with the oil, you will see a flash of light.</p></li>
+<li><p>Continue to lower the objective until you encounter the focal plane. The focal plane tends to be far down in the Z-direction. If you go too far in the Z-direction you will crack your slide and potentially damage the objective lense, so take your time!</p></li>
+<li><p>To view the image on the software, pull the eyepiece rod halfway out to direct 50% light to your eye and 50% to the camera. Pull the rod all the way out to direct light 100% to the camera. Click the “Live” button on the Locate tab in the laft panel and set the camera exposure.</p></li>
+<li><p>To acquire an image, click the “snap” button. If you want to save the images in their proprietary format, right click the image on the right panel and save. If you want them in jpg format, switch to the processing tab in the left panel and export the images to your file folder.</p></li>
+<li><p>You can add a scale bar with the graphics tool.</p></li>
+<li><p>When you’re finished, turn off the reflected light and remove your slide. Use lens paper to clean the oil off of the objective.</p></li>
+<li><p>Power off the software, then the microscope, then the power supply. Turn off the X-Cite lamp.</p></li>
+<li><p>Replace the dust cover on the microscope.</p></li>
+</ol>
+</div>
+<div id="cell-counting" class="section level2">
+<h2><span class="header-section-number">7.3</span> Cell Counting</h2>
+Bacteria densities (with the proper dilution) should be at least 30 organisms per field.
+<ul>
+<li>
+Count at least 10 fields (to achieve a final count of 300 bacterial cells).
+</li>
+<li>
+Calculate final bacterial densities using the following equation (from Wetzel and ikens, 1991).
+</li>
+</ul>
+<p></font></p>
+<p><font size="1">
+Bacteria ml-1 = (membrane conversion factor * ND) </br>
+Membrane conversion factor = Filtration area/area of micrometer field</br>
+N = Total number of bacteria counted/number of micrometer fields counted </br>
+D = Dilution factor; volume of sample stained/total volume of sample available</p>
+<ul>
+<div class="figure"><span id="fig:unnamed-chunk-45"></span>
+<img src="images/DAPI-7.png" alt="Glowing cells on a filter." width="250px" />
+<p class="caption">
+Figure 7.7: Glowing cells on a filter.
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-46"></span>
+<img src="images/DAPI-8.png" alt="Count total of at least 300 cells, calculate average # cells/frame" width="250px" />
+<p class="caption">
+Figure 7.8: Count total of at least 300 cells, calculate average # cells/frame
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-47"></span>
+<img src="images/DAPI-9.png" alt="#cells/frame   x   #frames/filter  =  total cell count/volume" width="250px" />
+<p class="caption">
+Figure 7.9: #cells/frame x #frames/filter = total cell count/volume
+</p>
+</div>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="version-control.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="qiime2-workflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="quest-tutorial.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -247,7 +343,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/OsburnLab/Protocols/edit/master/03-create-protocol.Rmd",
+"link": "https://github.com/OsburnLab/Protocols/edit/master/06-DAPI.Rmd",
 "text": "Edit"
 },
 "history": {

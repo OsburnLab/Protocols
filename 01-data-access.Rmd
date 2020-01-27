@@ -1,5 +1,6 @@
 # | Data Access + Storage {#data-access}
-**Created:** 2019-10-16 
+<font size="1">**Created by:** Caitlin Casar on 2019-10-16 </br>
+**Last updated:** 2019-10-16 </font>
 
 The Osburn Lab data is backed up to [RDSS](https://www.it.northwestern.edu/research/user-services/storage/research-data.htm) at Northwestern. You can access this data if you have permissions using the directions here. If you do not currently have access, you will need to be added as a user by Caitlin or Maggie. 
 

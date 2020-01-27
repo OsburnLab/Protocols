@@ -1,5 +1,6 @@
 # | Create a Protocol
-**Created:** 2019-10-16 
+<font size="1">**Created by:** Caitlin Casar on 2019-10-16 </br>
+**Last updated:** 2019-10-16 </font>
 
 Wanna share a cool protocol with your lab mates in this bookdown document? Follow this guide to learn how! 
 
