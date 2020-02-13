@@ -1,6 +1,6 @@
 # | DAPI + Cell Counting {#DAPI}
 <font size="1">**Created By:** Caitlin Casar on 2020-01-27 <br /> 
-**Last updated:** 2020-01-27 </font>
+**Last updated:** 2020-02-13 </font>
 
 ## Sample prep
 
