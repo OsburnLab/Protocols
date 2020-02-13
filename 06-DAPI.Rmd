@@ -149,6 +149,6 @@ Stain 100 microliters of E. coli with both the old and new dye. Can you see cell
 <li>**Yes!** The dye is the issue.</li>
 <li>**No!** If you cannot see cells on either filter, the dye is not the issue. Proceed to step 4. 
 
-<font size="3">**What else could be wrong?**</font>
+<font size="3">**4. What else could be wrong?**</font>
 
 The most common issues are with the scope, Citifluor, and dye. If these are not the issues, there are a few other things to check - inspect the filter tower components for defects or filter residue on the frit that might be preventing a seal. Try increasing/decreasing the excitation lamp intensity - the higher your intensity, the quicker the dye will bleach and prevent you from seeing cells. Test a batch of dye that works in another lab - maybe our freezer stock has degraded (this happens within a couple years!). 
