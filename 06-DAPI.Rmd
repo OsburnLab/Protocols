@@ -148,6 +148,7 @@ Stain 100 microliters of E. coli with both the old and new dye. Can you see cell
 <ul>
 <li>**Yes!** The dye is the issue.</li>
 <li>**No!** If you cannot see cells on either filter, the dye is not the issue. Proceed to step 4. 
+</ul>
 
 <font size="3">**4. What else could be wrong?**</font>
 
