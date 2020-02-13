@@ -114,3 +114,41 @@ knitr::include_graphics("images/DAPI-8.png")
 knitr::include_graphics("images/DAPI-9.png")
 ```
 </ul>
+
+## Troubleshooting
+
+This is a step by step guide to troubleshooting issues that arise during microscopy. Many things can go wrong and it's important to approach it as a process of elimination. 
+
+<font size="3">**1. Is something wrong with the microscope?**</font>
+
+The microscope kit includes a DAPI test slide. Can you can see the specimen on the slide?
+<ul>
+<li>**Yes!** There is no technical issue with the microscope. Proceed to step 2.</li>
+<li>**No!** Check that the eye piece shutter is open and the light path is directed 100% to the eye piece (not to the camera). Additionally, check that the Apotome filter is not blocking the light path. Once you've checked for these issues, if you still can't see the specimen it may be time to call a technician.</li>
+</ul>
+
+<font size="3">**2. Is something wrong with the antifade reagent?**</font>
+
+The antifade reagent has a shelf life. When precipitates form in the solution, it alters the refraction index of the solution and can obscure your image. Prepare an overnight culture of E. coli - **do not use your own sample or an old culture of E. coli.** Why? Because your sample may have issues (for example, your cell density may be too low), and because unhealthy cells do not stain as well as healthy cells. 
+
+Check that you can see cells by mounting 15 microliters of the culture on a slide and imaging via DIC. If you cannot see cells via DIC, your culture is not turbid enough. Wait until the culture becomes more turbid, then repeat this step before moving on to the next step.
+
+Next, stain 100 microliters of the culture and mount the filter with Citifluor, then repeat but instead replace the Citifluor with immersion oil. **Make sure you do not have two coverslips stacked on top of your filter and be sure to add immersion oil on top of the coverslip - failing to do this will result in a blurry image!** Can you see cells on the filter without Citifluor but cannot see cells on the filter with Citifluor?
+<ul>
+<li>**Yes!** The Citifluor is the issue. </li>
+<li>**No!** If you can't see cells on either filter, the Citifluor is not the issue. Proceed to step 3.</li>
+</ul>
+
+<font size="3">**3. Is something wrong with the dye?**</font>
+
+The working solution of DAPI in the fridge has a shelf life of ~3 months due to exposure to oxygen and light. Prepare a fresh solution of DAPI from the freezer stock. The freezer stock concentration is 1mg/mL. Dilute 15 microliters of the stock solution in a 15ml falcon tube by topping to 15mL with filter-sterilized milliQ water for a final concentration of 1microgram/mL. 
+
+Stain 100 microliters of E. coli with both the old and new dye. Can you see cells on the filter dyed with new dye but cannot see cells on the filter dyed with old dye?
+
+<ul>
+<li>**Yes!** The dye is the issue.</li>
+<li>**No!** If you cannot see cells on either filter, the dye is not the issue. Proceed to step 4. 
+
+<font size="3">**What else could be wrong?**</font>
+
+The most common issues are with the scope, Citifluor, and dye. If these are not the issues, there are a few other things to check - inspect the filter tower components for defects or filter residue on the frit that might be preventing a seal. Try increasing/decreasing the excitation lamp intensity - the higher your intensity, the quicker the dye will bleach and prevent you from seeing cells. Test a batch of dye that works in another lab - maybe our freezer stock has degraded (this happens within a couple years!). 
