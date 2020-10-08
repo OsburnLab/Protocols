@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 5 | Qiime2 workflow | Osburn Lab Protocols</title>
   <meta name="description" content="This is a collection of protocols for the Osburn Lab." />
-  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 5 | Qiime2 workflow | Osburn Lab Protocols" />
   <meta property="og:type" content="book" />
@@ -38,6 +38,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -159,6 +162,21 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 <li class="chapter" data-level="7.2" data-path="DAPI.html"><a href="DAPI.html#operating-the-microscope"><i class="fa fa-check"></i><b>7.2</b> Operating the Microscope</a></li>
 <li class="chapter" data-level="7.3" data-path="DAPI.html"><a href="DAPI.html#cell-counting"><i class="fa fa-check"></i><b>7.3</b> Cell Counting</a></li>
 <li class="chapter" data-level="7.4" data-path="DAPI.html"><a href="DAPI.html#troubleshooting"><i class="fa fa-check"></i><b>7.4</b> Troubleshooting</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html"><i class="fa fa-check"></i><b>8</b> | Submit Sequence Data</a><ul>
+<li class="chapter" data-level="8.1" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#new-submission"><i class="fa fa-check"></i><b>8.1</b> New Submission</a></li>
+<li class="chapter" data-level="8.2" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#subission-type"><i class="fa fa-check"></i><b>8.2</b> 1 Subission Type</a></li>
+<li class="chapter" data-level="8.3" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#submitter"><i class="fa fa-check"></i><b>8.3</b> 2 Submitter</a></li>
+<li class="chapter" data-level="8.4" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#sequencing-technology"><i class="fa fa-check"></i><b>8.4</b> 3 Sequencing Technology</a></li>
+<li class="chapter" data-level="8.5" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#sequences"><i class="fa fa-check"></i><b>8.5</b> 4 Sequences</a></li>
+<li class="chapter" data-level="8.6" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#sequence-processing"><i class="fa fa-check"></i><b>8.6</b> 5 Sequence Processing</a></li>
+<li class="chapter" data-level="8.7" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#source-info"><i class="fa fa-check"></i><b>8.7</b> 6 Source Info</a></li>
+<li class="chapter" data-level="8.8" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#bioproject-info"><i class="fa fa-check"></i><b>8.8</b> 7 BioProject Info</a></li>
+<li class="chapter" data-level="8.9" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#biosample-type"><i class="fa fa-check"></i><b>8.9</b> 8 BioSample Type</a></li>
+<li class="chapter" data-level="8.10" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#biosample-attributes"><i class="fa fa-check"></i><b>8.10</b> 9 BioSample Attributes</a></li>
+<li class="chapter" data-level="8.11" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#references"><i class="fa fa-check"></i><b>8.11</b> 10 References</a></li>
+<li class="chapter" data-level="8.12" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#review-submit"><i class="fa fa-check"></i><b>8.12</b> 11 Review &amp; Submit</a></li>
+<li class="chapter" data-level="8.13" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#correcting-submission"><i class="fa fa-check"></i><b>8.13</b> Correcting Submission</a></li>
 </ul></li>
 <li class="divider"></li>
 <li class="social">
@@ -301,11 +319,13 @@ Workflow for 16S amplicon sequence analysis in Qiime2
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -320,6 +340,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },

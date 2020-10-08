@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 8 | Submit Sequence Data | Osburn Lab Protocols</title>
+  <meta name="description" content="This is a collection of protocols for the Osburn Lab." />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 8 | Submit Sequence Data | Osburn Lab Protocols" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a collection of protocols for the Osburn Lab." />
+  <meta name="github-repo" content="rstudio/osburnlab/protocols" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 8 | Submit Sequence Data | Osburn Lab Protocols" />
+  
+  <meta name="twitter:description" content="This is a collection of protocols for the Osburn Lab." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="DAPI.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li>
+
+<a href="./">
+<img class="logo" src="images/LabLogo_White-01.png" height="50">
+</a>
+</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> | About</a></li>
+<li class="chapter" data-level="2" data-path="data-access.html"><a href="data-access.html"><i class="fa fa-check"></i><b>2</b> | Data Access + Storage</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-access.html"><a href="data-access.html#macos-users"><i class="fa fa-check"></i><b>2.1</b> MacOS Users</a></li>
+<li class="chapter" data-level="2.2" data-path="data-access.html"><a href="data-access.html#windows-users"><i class="fa fa-check"></i><b>2.2</b> Windows Users</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>3</b> | Version Control</a></li>
+<li class="chapter" data-level="4" data-path="create-a-protocol.html"><a href="create-a-protocol.html"><i class="fa fa-check"></i><b>4</b> | Create a Protocol</a></li>
+<li class="chapter" data-level="5" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html"><i class="fa fa-check"></i><b>5</b> | Qiime2 workflow</a><ul>
+<li class="chapter" data-level="5.1" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#import-data"><i class="fa fa-check"></i><b>5.1</b> Import data</a></li>
+<li class="chapter" data-level="5.2" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#demultiplexing"><i class="fa fa-check"></i><b>5.2</b> Demultiplexing</a></li>
+<li class="chapter" data-level="5.3" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#denoising-and-asv-generation"><i class="fa fa-check"></i><b>5.3</b> Denoising and ASV generation</a></li>
+<li class="chapter" data-level="5.4" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#taxonomy"><i class="fa fa-check"></i><b>5.4</b> Taxonomy</a></li>
+<li class="chapter" data-level="5.5" data-path="qiime2-workflow.html"><a href="qiime2-workflow.html#taxa-barplots-and-diversity-analyses-in-qiime2"><i class="fa fa-check"></i><b>5.5</b> Taxa barplots and diversity analyses in Qiime2</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="quest-tutorial.html"><a href="quest-tutorial.html"><i class="fa fa-check"></i><b>6</b> | Quest tutorial</a><ul>
+<li class="chapter" data-level="6.1" data-path="quest-tutorial.html"><a href="quest-tutorial.html#getting-acquainted-with-quest"><i class="fa fa-check"></i><b>6.1</b> Getting acquainted with Quest</a></li>
+<li class="chapter" data-level="6.2" data-path="quest-tutorial.html"><a href="quest-tutorial.html#using-qiime2-on-quest"><i class="fa fa-check"></i><b>6.2</b> Using Qiime2 on Quest</a></li>
+<li class="chapter" data-level="6.3" data-path="quest-tutorial.html"><a href="quest-tutorial.html#best-practices-in-a-shared-computing-environment"><i class="fa fa-check"></i><b>6.3</b> Best practices in a shared computing environment</a></li>
+<li class="chapter" data-level="6.4" data-path="quest-tutorial.html"><a href="quest-tutorial.html#interactive-jobs-on-quest"><i class="fa fa-check"></i><b>6.4</b> Interactive jobs on Quest</a></li>
+<li class="chapter" data-level="6.5" data-path="quest-tutorial.html"><a href="quest-tutorial.html#batch-jobs-on-quest"><i class="fa fa-check"></i><b>6.5</b> Batch jobs on Quest</a></li>
+<li class="chapter" data-level="6.6" data-path="quest-tutorial.html"><a href="quest-tutorial.html#a-note-on-partitions"><i class="fa fa-check"></i><b>6.6</b> A note on partitions</a></li>
+<li class="chapter" data-level="6.7" data-path="quest-tutorial.html"><a href="quest-tutorial.html#more-information"><i class="fa fa-check"></i><b>6.7</b> More information</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="DAPI.html"><a href="DAPI.html"><i class="fa fa-check"></i><b>7</b> | DAPI + Cell Counting</a><ul>
+<li class="chapter" data-level="7.1" data-path="DAPI.html"><a href="DAPI.html#sample-prep"><i class="fa fa-check"></i><b>7.1</b> Sample prep</a></li>
+<li class="chapter" data-level="7.2" data-path="DAPI.html"><a href="DAPI.html#operating-the-microscope"><i class="fa fa-check"></i><b>7.2</b> Operating the Microscope</a></li>
+<li class="chapter" data-level="7.3" data-path="DAPI.html"><a href="DAPI.html#cell-counting"><i class="fa fa-check"></i><b>7.3</b> Cell Counting</a></li>
+<li class="chapter" data-level="7.4" data-path="DAPI.html"><a href="DAPI.html#troubleshooting"><i class="fa fa-check"></i><b>7.4</b> Troubleshooting</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html"><i class="fa fa-check"></i><b>8</b> | Submit Sequence Data</a><ul>
+<li class="chapter" data-level="8.1" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#new-submission"><i class="fa fa-check"></i><b>8.1</b> New Submission</a></li>
+<li class="chapter" data-level="8.2" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#subission-type"><i class="fa fa-check"></i><b>8.2</b> 1 Subission Type</a></li>
+<li class="chapter" data-level="8.3" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#submitter"><i class="fa fa-check"></i><b>8.3</b> 2 Submitter</a></li>
+<li class="chapter" data-level="8.4" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#sequencing-technology"><i class="fa fa-check"></i><b>8.4</b> 3 Sequencing Technology</a></li>
+<li class="chapter" data-level="8.5" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#sequences"><i class="fa fa-check"></i><b>8.5</b> 4 Sequences</a></li>
+<li class="chapter" data-level="8.6" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#sequence-processing"><i class="fa fa-check"></i><b>8.6</b> 5 Sequence Processing</a></li>
+<li class="chapter" data-level="8.7" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#source-info"><i class="fa fa-check"></i><b>8.7</b> 6 Source Info</a></li>
+<li class="chapter" data-level="8.8" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#bioproject-info"><i class="fa fa-check"></i><b>8.8</b> 7 BioProject Info</a></li>
+<li class="chapter" data-level="8.9" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#biosample-type"><i class="fa fa-check"></i><b>8.9</b> 8 BioSample Type</a></li>
+<li class="chapter" data-level="8.10" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#biosample-attributes"><i class="fa fa-check"></i><b>8.10</b> 9 BioSample Attributes</a></li>
+<li class="chapter" data-level="8.11" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#references"><i class="fa fa-check"></i><b>8.11</b> 10 References</a></li>
+<li class="chapter" data-level="8.12" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#review-submit"><i class="fa fa-check"></i><b>8.12</b> 11 Review &amp; Submit</a></li>
+<li class="chapter" data-level="8.13" data-path="submit-sequence-data.html"><a href="submit-sequence-data.html#correcting-submission"><i class="fa fa-check"></i><b>8.13</b> Correcting Submission</a></li>
+</ul></li>
+<li class="divider"></li>
+<li class="social">
+<a target="blank" href="https://github.com/osburnlab" class="icon fa-github"></a>
+<a target="blank" href="https://twitter.com/osburnlab" class="icon fa-twitter"></a>
+</li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Osburn Lab Protocols</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="submit-sequence-data" class="section level1">
+<h1><span class="header-section-number"> 8</span> | Submit Sequence Data</h1>
+<p><font size="1"><strong>Created by:</strong> Caitlin Casar on 2020-10-08 </br>
+<strong>Last updated:</strong> 2020-10-08 </font></p>
+<p>When you publish a manuscript with DNA sequence data, you will need to submit your data to the appropriate data repository. For 16S rRNA sequence data, we have submitted to the GenBank on the National Center for Biotechnology Information (NCBI) website.</p>
+<div id="new-submission" class="section level2">
+<h2><span class="header-section-number">8.1</span> New Submission</h2>
+<p>Click <a href="https://submit.ncbi.nlm.nih.gov/">here</a> to navigate to the NCBI submission portal. You will need to create an account and log in. Click the blue 16S rRNA button and select GenBank from the dropdown menu.</p>
+<p><img src="images/submission-portal.png" width="840" /></p>
+<p>Click the blue submit button.</p>
+<p><img src="images/submit.png" width="840" /></p>
+<p>Then, click the blue New Submission button.
+<img src="images/new-submission.png" width="840" /></p>
+</div>
+<div id="subission-type" class="section level2">
+<h2><span class="header-section-number">8.2</span> 1 Subission Type</h2>
+<p>Fill out the Submission Type form, then click the blue Continue button.
+<img src="images/submission-type.png" width="840" /></p>
+<p>Fill out the general information form - select No for the Bioproject and Biosample sections, and set the release date sometime in the distant future if the data is not yet published. Click the blue Continue button.
+<img src="images/general-information.png" width="840" /></p>
+</div>
+<div id="submitter" class="section level2">
+<h2><span class="header-section-number">8.3</span> 2 Submitter</h2>
+<p>Next, fill out the Subitter form with your contact information then click the blue Continue button.
+<img src="images/submitter.png" width="840" /></p>
+</div>
+<div id="sequencing-technology" class="section level2">
+<h2><span class="header-section-number">8.4</span> 3 Sequencing Technology</h2>
+<p>Next, fill out the Sequencing Technology form with the appropriate sequencing platform and assembler. Click the blue Continue button.
+<img src="images/sequencing-technology.png" width="840" /></p>
+<p>Select <code>Upload a file using Excel or text format...</code> from the Attributes options. Then, click on the <code>Download Excel</code> link to get the attribute submission template.</p>
+<p><img src="images/attributes.png" width="840" /></p>
+</div>
+<div id="sequences" class="section level2">
+<h2><span class="header-section-number">8.5</span> 4 Sequences</h2>
+<p>Fill out the Sequences form. Set the release date to sometime in the distant future if your data is not yet published. If you removed chimeric sequences, select <code>yes</code> from the Chimera check options and enter the program you used.</p>
+<p><img src="images/sequenc-submission-1.png" width="840" /></p>
+<p>Select the appropriate options for the rest of the form, then cick the <code>Choose File</code> button to upload your sequence data. Note that these <strong>files should not exceed ~250MB and should be &lt; 1 million reads.</strong> If you are submiting a very large dataset, you should split the data into chunks and submit each chunk separately. If you do this, be sure to contact GenBank support to communicate that these data comrprise a single dataset. Note that the submission form mentions submitting OTUs - I was able to submit the unbinned reads with a written explanation of why I wanted to submit reads instead of OTUs. Once your file has finished uploading, click the blue Continue button.</p>
+<p>You will see a yellow bar at the top indicating the progress of the data processing. This may take ~10 minutes.
+<img src="images/sequenc-submission-2.png" width="840" /></p>
+</div>
+<div id="sequence-processing" class="section level2">
+<h2><span class="header-section-number">8.6</span> 5 Sequence Processing</h2>
+<p>Your sequences will now be screened, check the box and click the blue Continue button.
+<img src="images/sequence-processing.png" width="840" /></p>
+</div>
+<div id="source-info" class="section level2">
+<h2><span class="header-section-number">8.7</span> 6 Source Info</h2>
+<p>Next, fill out the Source Information form. If you did not already create a BioProject or BioSample, select no for both sections and click the blue Continue button. If the file has reads from multiple samples, select the <code>Batch/Multiple BioSamples</code> option.
+<img src="images/source-info.png" width="840" /></p>
+</div>
+<div id="bioproject-info" class="section level2">
+<h2><span class="header-section-number">8.8</span> 7 BioProject Info</h2>
+<p>Fill out the BioProject info, then click the blue Continue button.
+<img src="images/bioproject-info.png" width="840" /></p>
+</div>
+<div id="biosample-type" class="section level2">
+<h2><span class="header-section-number">8.9</span> 8 BioSample Type</h2>
+<p>Select the appropriate biosample type, then click the blue Continue button.
+<img src="images/biosample-type.png" width="840" /></p>
+</div>
+<div id="biosample-attributes" class="section level2">
+<h2><span class="header-section-number">8.10</span> 9 BioSample Attributes</h2>
+<p>Fill out the BioSample attributes form, then click the blue Continue button.
+<img src="images/biosample-attributes2.png" width="840" /></p>
+</div>
+<div id="references" class="section level2">
+<h2><span class="header-section-number">8.11</span> 10 References</h2>
+<p>Fil out the References form, then click the blue Continue button.
+<img src="images/references.png" width="840" /></p>
+</div>
+<div id="review-submit" class="section level2">
+<h2><span class="header-section-number">8.12</span> 11 Review &amp; Submit</h2>
+<p>Double check your submission and make any necessary corrections, then click the blue Submit button.
+<img src="images/review-submit.png" width="840" /></p>
+</div>
+<div id="correcting-submission" class="section level2">
+<h2><span class="header-section-number">8.13</span> Correcting Submission</h2>
+<p>Once your submission has processed, you may get an automated email saying there were errors in your submission that need to be corrected before the submission can be processed. The email will have a link for you to follow to the submission that needs correcting, here you will find links to download html reports with details about the errors. Your submission will be automatically checked for chimeric sequences using NCBI’s algorithm. If chimeric sequences are found, you will need to remove these, then re-upload and re-submit the data. Be sure to also remove these reads from your mapping file.</p>
+<p>I think this is where you also get prompted for a mapping file if you didn’t submit one with your sequence data. There will be a template to download called <code>biosample_assignment.tsv</code> that has all of your sequence IDs in a tab-delimited file with a blank column for biosample_accession. You can add the appropriate accession numbers to each sequence ID quickly in R. Below is a script I wrote for the DeMMO fluid community data submission mapping file. This script assigns accession numbers to each sequence ID and removes chimeric sequences identified by the GenBank chimera checker listed in the seq error report:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">pacman<span class="op">::</span><span class="kw">p_load</span>(tidyverse)</a>
+<a class="sourceLine" id="cb29-2" title="2"></a>
+<a class="sourceLine" id="cb29-3" title="3">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;orig_data&quot;</span>, <span class="dt">full.names =</span> T, <span class="dt">pattern =</span> <span class="st">&quot;biosample_assignment&quot;</span>)</a>
+<a class="sourceLine" id="cb29-4" title="4"></a>
+<a class="sourceLine" id="cb29-5" title="5">chimeric_seqs &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;orig_data&quot;</span>, <span class="dt">full.names =</span> T, <span class="dt">pattern =</span> <span class="st">&quot;chimericSeqs&quot;</span>)</a>
+<a class="sourceLine" id="cb29-6" title="6"></a>
+<a class="sourceLine" id="cb29-7" title="7">metadata &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;orig_data/metadata.csv&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-8" title="8"><span class="st">  </span><span class="kw">select</span>(sample_id, site) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">biosample_accession =</span> <span class="kw">recode</span>(site, <span class="dt">D1 =</span> <span class="st">&quot;SAMN12684770&quot;</span>, <span class="dt">D2 =</span> <span class="st">&quot;SAMN12684830&quot;</span>, <span class="dt">D3 =</span> <span class="st">&quot;SAMN12684819&quot;</span>,  <span class="dt">D4 =</span> <span class="st">&quot;SAMN12684826&quot;</span>, </a>
+<a class="sourceLine" id="cb29-10" title="10">                                      <span class="dt">D5 =</span> <span class="st">&quot;SAMN12684828&quot;</span>, <span class="dt">D6 =</span> <span class="st">&quot;SAMN12684862&quot;</span>, <span class="dt">DuselD =</span> <span class="st">&quot;SAMN12768991&quot;</span>, <span class="dt">ambient.control =</span> <span class="st">&quot;SAMN12768991&quot;</span>))</a>
+<a class="sourceLine" id="cb29-11" title="11"></a>
+<a class="sourceLine" id="cb29-12" title="12">assign_biosample &lt;-<span class="st"> </span><span class="cf">function</span>(file){</a>
+<a class="sourceLine" id="cb29-13" title="13">  samples &lt;-<span class="st"> </span><span class="kw">read_delim</span>(file, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-14" title="14"><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>biosample_accession) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-15" title="15"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">sample_id =</span> <span class="kw">str_remove</span>(Sequence_ID, <span class="st">&quot;_.*&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-16" title="16"><span class="st">    </span><span class="kw">left_join</span>(metadata) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-17" title="17"><span class="st">    </span><span class="kw">select</span>(Sequence_ID, biosample_accession) </a>
+<a class="sourceLine" id="cb29-18" title="18"></a>
+<a class="sourceLine" id="cb29-19" title="19">  <span class="cf">if</span>(<span class="kw">any</span>(<span class="kw">str_extract</span>(chimeric_seqs, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">str_extract</span>(file, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>))){</a>
+<a class="sourceLine" id="cb29-20" title="20">    chimeras &lt;-<span class="st"> </span>chimeric_seqs[<span class="kw">which</span>(<span class="kw">str_extract</span>(chimeric_seqs, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">str_extract</span>(file, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>))] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-21" title="21"><span class="st">    </span><span class="kw">read_delim</span>(<span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">col_names =</span> F)</a>
+<a class="sourceLine" id="cb29-22" title="22">    </a>
+<a class="sourceLine" id="cb29-23" title="23">    samples &lt;-<span class="st"> </span>samples <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-24" title="24"><span class="st">      </span><span class="kw">filter</span>(<span class="op">!</span>Sequence_ID <span class="op">%in%</span><span class="st"> </span>chimeras<span class="op">$</span>X1)</a>
+<a class="sourceLine" id="cb29-25" title="25">  }</a>
+<a class="sourceLine" id="cb29-26" title="26">  </a>
+<a class="sourceLine" id="cb29-27" title="27">  samples <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-28" title="28"><span class="st">  </span><span class="kw">write_delim</span>(<span class="kw">paste0</span>(<span class="st">&quot;Osburn2020_&quot;</span>, <span class="kw">str_extract</span>(file, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>), <span class="st">&quot;_biosample_assignment.tsv&quot;</span>), <span class="dt">delim =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb29-29" title="29">}</a>
+<a class="sourceLine" id="cb29-30" title="30"></a>
+<a class="sourceLine" id="cb29-31" title="31"><span class="kw">lapply</span>(files, assign_biosample)</a></code></pre></div>
+<p>Now that your data is submitted, check your emails regularly for any communications from the GenBank submission team - failure to reposond promptly to these emails may result in your submission being removed.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="DAPI.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/OsburnLab/Protocols/edit/master/07-submit-sequence-data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

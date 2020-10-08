@@ -1,0 +1,158 @@
+# | Submit Sequence Data
+<font size="1">**Created by:** Caitlin Casar on 2020-10-08 </br>
+**Last updated:** 2020-10-08 </font>
+
+When you publish a manuscript with DNA sequence data, you will need to submit your data to the appropriate data repository. For 16S rRNA sequence data, we have submitted to the GenBank on the National Center for Biotechnology Information (NCBI) website.
+
+## New Submission 
+
+Click [here](https://submit.ncbi.nlm.nih.gov/) to navigate to the NCBI submission portal. You will need to create an account and log in. Click the blue 16S rRNA button and select GenBank from the dropdown menu. 
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/submission-portal.png")
+```
+
+Click the blue submit button.
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/submit.png")
+```
+
+Then, click the blue New Submission button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/new-submission.png")
+```
+
+## 1 Subission Type
+Fill out the Submission Type form, then click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/submission-type.png")
+```
+
+Fill out the general information form - select No for the Bioproject and Biosample sections, and set the release date sometime in the distant future if the data is not yet published. Click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/general-information.png")
+```
+
+## 2 Submitter
+Next, fill out the Subitter form with your contact information then click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/submitter.png")
+```
+
+## 3 Sequencing Technology
+Next, fill out the Sequencing Technology form with the appropriate sequencing platform and assembler. Click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/sequencing-technology.png")
+```
+
+Select `Upload a file using Excel or text format...` from the Attributes options. Then, click on the `Download Excel` link to get the attribute submission template. 
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/attributes.png")
+```
+
+## 4 Sequences 
+Fill out the Sequences form. Set the release date to sometime in the distant future if your data is not yet published. If you removed chimeric sequences, select `yes` from the Chimera check options and enter the program you used. 
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/sequenc-submission-1.png")
+```
+
+Select the appropriate options for the rest of the form, then cick the `Choose File` button to upload your sequence data. Note that these **files should not exceed ~250MB and should be < 1 million reads.** If you are submiting a very large dataset, you should split the data into chunks and submit each chunk separately. If you do this, be sure to contact GenBank support to communicate that these data comrprise a single dataset. Note that the submission form mentions submitting OTUs - I was able to submit the unbinned reads with a written explanation of why I wanted to submit reads instead of OTUs. Once your file has finished uploading, click the blue Continue button.
+
+You will see a yellow bar at the top indicating the progress of the data processing. This may take ~10 minutes.
+```{r, echo=FALSE}
+knitr::include_graphics("images/sequenc-submission-2.png")
+```
+
+## 5 Sequence Processing
+Your sequences will now be screened, check the box and click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/sequence-processing.png")
+```
+
+## 6 Source Info
+
+Next, fill out the Source Information form. If you did not already create a BioProject or BioSample, select no for both sections and click the blue Continue button. If the file has reads from multiple samples, select the `Batch/Multiple BioSamples` option. 
+```{r, echo=FALSE}
+knitr::include_graphics("images/source-info.png")
+```
+
+## 7 BioProject Info
+
+Fill out the BioProject info, then click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/bioproject-info.png")
+```
+
+## 8 BioSample Type
+
+Select the appropriate biosample type, then click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/biosample-type.png")
+```
+
+
+## 9 BioSample Attributes
+
+Fill out the BioSample attributes form, then click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/biosample-attributes2.png")
+```
+
+## 10 References
+
+Fil out the References form, then click the blue Continue button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/references.png")
+```
+
+## 11 Review & Submit
+
+Double check your submission and make any necessary corrections, then click the blue Submit button.
+```{r, echo=FALSE}
+knitr::include_graphics("images/review-submit.png")
+```
+
+## Correcting Submission
+
+Once your submission has processed, you may get an automated email saying there were errors in your submission that need to be corrected before the submission can be processed. The email will have a link for you to follow to the submission that needs correcting, here you will find links to download html reports with details about the errors. Your submission will be automatically checked for chimeric sequences using NCBI's algorithm. If chimeric sequences are found, you will need to remove these, then re-upload and re-submit the data. Be sure to also remove these reads from your mapping file. 
+
+I think this is where you also get prompted for a mapping file if you didn't submit one with your sequence data. There will be a template to download called `biosample_assignment.tsv` that has all of your sequence IDs in a tab-delimited file with a blank column for biosample_accession. You can add the appropriate accession numbers to each sequence ID quickly in R. Below is a script I wrote for the DeMMO fluid community data submission mapping file. This script assigns accession numbers to each sequence ID and removes chimeric sequences identified by the GenBank chimera checker listed in the seq error report:
+
+```{r, eval=F}
+pacman::p_load(tidyverse)
+
+files <- list.files("orig_data", full.names = T, pattern = "biosample_assignment")
+
+chimeric_seqs <- list.files("orig_data", full.names = T, pattern = "chimericSeqs")
+
+metadata <- read_csv("orig_data/metadata.csv") %>%
+  select(sample_id, site) %>%
+  mutate(biosample_accession = recode(site, D1 = "SAMN12684770", D2 = "SAMN12684830", D3 = "SAMN12684819",  D4 = "SAMN12684826", 
+                                      D5 = "SAMN12684828", D6 = "SAMN12684862", DuselD = "SAMN12768991", ambient.control = "SAMN12768991"))
+
+assign_biosample <- function(file){
+  samples <- read_delim(file, delim="\t") %>%
+    select(-biosample_accession) %>%
+    mutate(sample_id = str_remove(Sequence_ID, "_.*")) %>%
+    left_join(metadata) %>%
+    select(Sequence_ID, biosample_accession) 
+
+  if(any(str_extract(chimeric_seqs, '\\d') %in% str_extract(file, '\\d'))){
+    chimeras <- chimeric_seqs[which(str_extract(chimeric_seqs, '\\d') %in% str_extract(file, '\\d'))] %>%
+    read_delim(delim="\t", col_names = F)
+    
+    samples <- samples %>%
+      filter(!Sequence_ID %in% chimeras$X1)
+  }
+  
+  samples %>%
+  write_delim(paste0("Osburn2020_", str_extract(file, "\\d"), "_biosample_assignment.tsv"), delim = "\t")
+}
+
+lapply(files, assign_biosample)
+```
+
+Now that your data is submitted, check your emails regularly for any communications from the GenBank submission team - failure to reposond promptly to these emails may result in your submission being removed. 
