@@ -14,7 +14,7 @@ Before logging in to Quest, I recommend downloading [Cyberduck](https://cyberduc
 
 To log in to Quest, enter the following into the command line (or GitBASH):
 
-```{python, echo=TRUE, eval=FALSE}
+```{bash, echo=TRUE, eval=FALSE}
 ssh -X netid@quest.it.northwestern.edu
 ```
 
@@ -24,7 +24,7 @@ In the command line, you can navigate Quest via Unix commands. For example, use 
 
 ## Using Qiime2 on Quest
 
-The Qiime2 software is currently available as a Docker image on the DockerHub (version 2018.8). On Quest, you can download this image via [Singularity](https://kb.northwestern.edu/using-singularity-on-quest). Navigate to your project directory on Quest and run the following command:
+The Qiime2 software is currently available as a Docker image on DockerHub. On Quest, you can download this image via [Singularity](https://kb.northwestern.edu/using-singularity-on-quest). Navigate to your project directory on Quest and run the following command:
 
 ```{python, echo=TRUE, eval=FALSE}
 singularity pull --name qiime2-core2018-8.simg docker://qiime2/core:2018.8
@@ -57,9 +57,9 @@ srun --account=<allocation-id> --time=<hh:mm:ss> --partition=<queue_name> --mem=
 Running the above command to will do several things. The ```--account``` argument should be your allocation ID, which helps IT "bill" the number of compute hours to the right project. ```--time``` specifies how long you would like to have a node from which you can submit jobs. ```--partition``` is defined by the requested amount of ```--time``` and is used to determine how long your allocation request will be queued (see below). Finally, ```--mem``` is the amount of memory requested for the job. Submitting ```srun``` will bring you to an "allocation queue," where you will eventually be given resources to run your Qiime2 commands. Running the same ```qiime --help``` command above in an interactive job command will look something like:
 
 ```{python, echo=TRUE, eval=FALSE}
-module load singularity
-
 srun --account=a12345 --time=01:00:00 --partition=short --mem=18G --pty bash -l 
+
+module load singularity
 
 singularity exec /projects/<allocation-id>/qiime2-core2018-8.simg qiime --help
 ```

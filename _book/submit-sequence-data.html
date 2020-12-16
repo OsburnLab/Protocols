@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 8 | Submit Sequence Data | Osburn Lab Protocols</title>
   <meta name="description" content="This is a collection of protocols for the Osburn Lab." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 8 | Submit Sequence Data | Osburn Lab Protocols" />
   <meta property="og:type" content="book" />
@@ -67,7 +67,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -281,37 +281,37 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 <h2><span class="header-section-number">8.13</span> Correcting Submission</h2>
 <p>Once your submission has processed, you may get an automated email saying there were errors in your submission that need to be corrected before the submission can be processed. The email will have a link for you to follow to the submission that needs correcting, here you will find links to download html reports with details about the errors. Your submission will be automatically checked for chimeric sequences using NCBI’s algorithm. If chimeric sequences are found, you will need to remove these, then re-upload and re-submit the data. Be sure to also remove these reads from your mapping file.</p>
 <p>I think this is where you also get prompted for a mapping file if you didn’t submit one with your sequence data. There will be a template to download called <code>biosample_assignment.tsv</code> that has all of your sequence IDs in a tab-delimited file with a blank column for biosample_accession. You can add the appropriate accession numbers to each sequence ID quickly in R. Below is a script I wrote for the DeMMO fluid community data submission mapping file. This script assigns accession numbers to each sequence ID and removes chimeric sequences identified by the GenBank chimera checker listed in the seq error report:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">pacman<span class="op">::</span><span class="kw">p_load</span>(tidyverse)</a>
-<a class="sourceLine" id="cb29-2" title="2"></a>
-<a class="sourceLine" id="cb29-3" title="3">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;orig_data&quot;</span>, <span class="dt">full.names =</span> T, <span class="dt">pattern =</span> <span class="st">&quot;biosample_assignment&quot;</span>)</a>
-<a class="sourceLine" id="cb29-4" title="4"></a>
-<a class="sourceLine" id="cb29-5" title="5">chimeric_seqs &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;orig_data&quot;</span>, <span class="dt">full.names =</span> T, <span class="dt">pattern =</span> <span class="st">&quot;chimericSeqs&quot;</span>)</a>
-<a class="sourceLine" id="cb29-6" title="6"></a>
-<a class="sourceLine" id="cb29-7" title="7">metadata &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;orig_data/metadata.csv&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-8" title="8"><span class="st">  </span><span class="kw">select</span>(sample_id, site) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">biosample_accession =</span> <span class="kw">recode</span>(site, <span class="dt">D1 =</span> <span class="st">&quot;SAMN12684770&quot;</span>, <span class="dt">D2 =</span> <span class="st">&quot;SAMN12684830&quot;</span>, <span class="dt">D3 =</span> <span class="st">&quot;SAMN12684819&quot;</span>,  <span class="dt">D4 =</span> <span class="st">&quot;SAMN12684826&quot;</span>, </a>
-<a class="sourceLine" id="cb29-10" title="10">                                      <span class="dt">D5 =</span> <span class="st">&quot;SAMN12684828&quot;</span>, <span class="dt">D6 =</span> <span class="st">&quot;SAMN12684862&quot;</span>, <span class="dt">DuselD =</span> <span class="st">&quot;SAMN12768991&quot;</span>, <span class="dt">ambient.control =</span> <span class="st">&quot;SAMN12768991&quot;</span>))</a>
-<a class="sourceLine" id="cb29-11" title="11"></a>
-<a class="sourceLine" id="cb29-12" title="12">assign_biosample &lt;-<span class="st"> </span><span class="cf">function</span>(file){</a>
-<a class="sourceLine" id="cb29-13" title="13">  samples &lt;-<span class="st"> </span><span class="kw">read_delim</span>(file, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-14" title="14"><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>biosample_accession) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-15" title="15"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">sample_id =</span> <span class="kw">str_remove</span>(Sequence_ID, <span class="st">&quot;_.*&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-16" title="16"><span class="st">    </span><span class="kw">left_join</span>(metadata) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-17" title="17"><span class="st">    </span><span class="kw">select</span>(Sequence_ID, biosample_accession) </a>
-<a class="sourceLine" id="cb29-18" title="18"></a>
-<a class="sourceLine" id="cb29-19" title="19">  <span class="cf">if</span>(<span class="kw">any</span>(<span class="kw">str_extract</span>(chimeric_seqs, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">str_extract</span>(file, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>))){</a>
-<a class="sourceLine" id="cb29-20" title="20">    chimeras &lt;-<span class="st"> </span>chimeric_seqs[<span class="kw">which</span>(<span class="kw">str_extract</span>(chimeric_seqs, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">str_extract</span>(file, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>))] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-21" title="21"><span class="st">    </span><span class="kw">read_delim</span>(<span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">col_names =</span> F)</a>
-<a class="sourceLine" id="cb29-22" title="22">    </a>
-<a class="sourceLine" id="cb29-23" title="23">    samples &lt;-<span class="st"> </span>samples <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-24" title="24"><span class="st">      </span><span class="kw">filter</span>(<span class="op">!</span>Sequence_ID <span class="op">%in%</span><span class="st"> </span>chimeras<span class="op">$</span>X1)</a>
-<a class="sourceLine" id="cb29-25" title="25">  }</a>
-<a class="sourceLine" id="cb29-26" title="26">  </a>
-<a class="sourceLine" id="cb29-27" title="27">  samples <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb29-28" title="28"><span class="st">  </span><span class="kw">write_delim</span>(<span class="kw">paste0</span>(<span class="st">&quot;Osburn2020_&quot;</span>, <span class="kw">str_extract</span>(file, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>), <span class="st">&quot;_biosample_assignment.tsv&quot;</span>), <span class="dt">delim =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb29-29" title="29">}</a>
-<a class="sourceLine" id="cb29-30" title="30"></a>
-<a class="sourceLine" id="cb29-31" title="31"><span class="kw">lapply</span>(files, assign_biosample)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">pacman<span class="op">::</span><span class="kw">p_load</span>(tidyverse)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;orig_data&quot;</span>, <span class="dt">full.names =</span> T, <span class="dt">pattern =</span> <span class="st">&quot;biosample_assignment&quot;</span>)</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">chimeric_seqs &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;orig_data&quot;</span>, <span class="dt">full.names =</span> T, <span class="dt">pattern =</span> <span class="st">&quot;chimericSeqs&quot;</span>)</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">metadata &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;orig_data/metadata.csv&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-8" data-line-number="8"><span class="st">  </span><span class="kw">select</span>(sample_id, site) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-9" data-line-number="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">biosample_accession =</span> <span class="kw">recode</span>(site, <span class="dt">D1 =</span> <span class="st">&quot;SAMN12684770&quot;</span>, <span class="dt">D2 =</span> <span class="st">&quot;SAMN12684830&quot;</span>, <span class="dt">D3 =</span> <span class="st">&quot;SAMN12684819&quot;</span>,  <span class="dt">D4 =</span> <span class="st">&quot;SAMN12684826&quot;</span>, </a>
+<a class="sourceLine" id="cb29-10" data-line-number="10">                                      <span class="dt">D5 =</span> <span class="st">&quot;SAMN12684828&quot;</span>, <span class="dt">D6 =</span> <span class="st">&quot;SAMN12684862&quot;</span>, <span class="dt">DuselD =</span> <span class="st">&quot;SAMN12768991&quot;</span>, <span class="dt">ambient.control =</span> <span class="st">&quot;SAMN12768991&quot;</span>))</a>
+<a class="sourceLine" id="cb29-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb29-12" data-line-number="12">assign_biosample &lt;-<span class="st"> </span><span class="cf">function</span>(file){</a>
+<a class="sourceLine" id="cb29-13" data-line-number="13">  samples &lt;-<span class="st"> </span><span class="kw">read_delim</span>(file, <span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-14" data-line-number="14"><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>biosample_accession) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-15" data-line-number="15"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">sample_id =</span> <span class="kw">str_remove</span>(Sequence_ID, <span class="st">&quot;_.*&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-16" data-line-number="16"><span class="st">    </span><span class="kw">left_join</span>(metadata) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-17" data-line-number="17"><span class="st">    </span><span class="kw">select</span>(Sequence_ID, biosample_accession) </a>
+<a class="sourceLine" id="cb29-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb29-19" data-line-number="19">  <span class="cf">if</span>(<span class="kw">any</span>(<span class="kw">str_extract</span>(chimeric_seqs, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">str_extract</span>(file, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>))){</a>
+<a class="sourceLine" id="cb29-20" data-line-number="20">    chimeras &lt;-<span class="st"> </span>chimeric_seqs[<span class="kw">which</span>(<span class="kw">str_extract</span>(chimeric_seqs, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">str_extract</span>(file, <span class="st">&#39;</span><span class="ch">\\</span><span class="st">d&#39;</span>))] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-21" data-line-number="21"><span class="st">    </span><span class="kw">read_delim</span>(<span class="dt">delim=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">col_names =</span> F)</a>
+<a class="sourceLine" id="cb29-22" data-line-number="22">    </a>
+<a class="sourceLine" id="cb29-23" data-line-number="23">    samples &lt;-<span class="st"> </span>samples <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-24" data-line-number="24"><span class="st">      </span><span class="kw">filter</span>(<span class="op">!</span>Sequence_ID <span class="op">%in%</span><span class="st"> </span>chimeras<span class="op">$</span>X1)</a>
+<a class="sourceLine" id="cb29-25" data-line-number="25">  }</a>
+<a class="sourceLine" id="cb29-26" data-line-number="26">  </a>
+<a class="sourceLine" id="cb29-27" data-line-number="27">  samples <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb29-28" data-line-number="28"><span class="st">  </span><span class="kw">write_delim</span>(<span class="kw">paste0</span>(<span class="st">&quot;Osburn2020_&quot;</span>, <span class="kw">str_extract</span>(file, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>), <span class="st">&quot;_biosample_assignment.tsv&quot;</span>), <span class="dt">delim =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb29-29" data-line-number="29">}</a>
+<a class="sourceLine" id="cb29-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb29-31" data-line-number="31"><span class="kw">lapply</span>(files, assign_biosample)</a></code></pre></div>
 <p>Now that your data is submitted, check your emails regularly for any communications from the GenBank submission team - failure to reposond promptly to these emails may result in your submission being removed.</p>
 
 </div>

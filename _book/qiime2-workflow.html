@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 5 | Qiime2 workflow | Osburn Lab Protocols</title>
   <meta name="description" content="This is a collection of protocols for the Osburn Lab." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 5 | Qiime2 workflow | Osburn Lab Protocols" />
   <meta property="og:type" content="book" />
@@ -67,7 +67,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -211,10 +211,10 @@ Workflow for 16S amplicon sequence analysis in Qiime2
 <div id="import-data" class="section level2">
 <h2><span class="header-section-number">5.1</span> Import data</h2>
 <p>This protocol is designed for the processing of 16S rRNA gene amplicon data using 515F/806R primers. Qiime2 requires us to convert the raw data the sequencing center sends us into Qiime-zipped artifacts, or a <code>.qza</code> extension. We must first import our data (paired-end .fastq files) into this format:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" title="1">qiime tools <span class="im">import</span> </a>
-<a class="sourceLine" id="cb10-2" title="2">  <span class="op">--</span><span class="bu">type</span> EMPPairedEndSequences </a>
-<a class="sourceLine" id="cb10-3" title="3">  <span class="op">--</span><span class="bu">input</span><span class="op">-</span>path emp<span class="op">-</span>paired<span class="op">-</span>end<span class="op">-</span>sequences </a>
-<a class="sourceLine" id="cb10-4" title="4">  <span class="op">--</span>output<span class="op">-</span>path emp<span class="op">-</span>paired<span class="op">-</span>end<span class="op">-</span>sequences.qza</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">qiime</span> tools import \</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  --type EMPPairedEndSequences \</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  --input-path emp-paired-end-sequences \</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  --output-path emp-paired-end-sequences.qza</a></code></pre></div>
 <p>The above function requires three .fastq files in the folder <code>emp-paired-end-sequences</code>. One file is for the forward reads, one is for the reverse reads, and another is for the barcodes. They <em>must</em> be named <code>forward.fastq.gz</code>, <code>reverse.fastq.gz</code>, and <code>barcodes.fastq.gz</code>, respectively.</p>
 <p><code>qiime tools import</code> will yield a single output, <code>emp-paired-end-sequences.qza</code>, that will contain all of the barcoded reads from every single sample submitted to the sequencing center.</p>
 </div>
@@ -223,30 +223,30 @@ Workflow for 16S amplicon sequence analysis in Qiime2
 <p>At the sequencing center, DNA sequences were given a barcode specific to each sample so we can track which sample our reads in the <code>emp-paired-end-sequences.qza</code> file originated from. We do this by <em>demultiplexing</em> our sequences.</p>
 <p>In Qiime2, we need to create a metadata file that contains the barcodes used for each sample. Check out this <a href="https://docs.google.com/spreadsheets/d/1y3yM50tW_23H7fXeou9XwyM92VNd8dCtgk8ndHOMSMs/edit#gid=0">example</a> from the Qiime2 documentation of how this metadata file should be formatted. The sequencing center should send a mapping file from which you can obtain the barcodes for each sample. Be sure to save the metadata file as a .tsv. Specify the barcodes and other associated metadata only for the samples you are interested in analyzing. As is often the case in our lab, sequencing data is typically sent back as a mix of samples from different projects. Only including your samples in the metadata file will subset the large <code>.qza</code> file and will significantly cut down on computation time.</p>
 <p>Because we are demultiplexing EMP paired-end sequences, we should use the <code>demux emp-paired</code> command. The column which contains the barcode in the metadata file for each sample must be specified using the argument <code>barcodes-column</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" title="1">qiime demux emp<span class="op">-</span>paired </a>
-<a class="sourceLine" id="cb11-2" title="2">  <span class="op">--</span>m<span class="op">-</span>barcodes<span class="op">-</span><span class="bu">file</span> sample<span class="op">-</span>metadata.tsv </a>
-<a class="sourceLine" id="cb11-3" title="3">  <span class="op">--</span>m<span class="op">-</span>barcodes<span class="op">-</span>column barcode<span class="op">-</span>sequence </a>
-<a class="sourceLine" id="cb11-4" title="4">  <span class="op">--</span>i<span class="op">-</span>seqs emp<span class="op">-</span>paired<span class="op">-</span>end<span class="op">-</span>sequences.qza </a>
-<a class="sourceLine" id="cb11-5" title="5">  <span class="op">--</span>o<span class="op">-</span>per<span class="op">-</span>sample<span class="op">-</span>sequences demux.qza </a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ex">qiime</span> demux emp-paired \</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  --m-barcodes-file sample-metadata.tsv \</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  --m-barcodes-column barcode-sequence \</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">  --i-seqs emp-paired-end-sequences.qza \</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">  --o-per-sample-sequences demux.qza </a></code></pre></div>
 <p>Note: if you have reverse complement sequences, you must pass the argument, <code>--p-rev-comp-mapping-barcodes</code> to your <code>demux</code> command to account for this.</p>
 <p>You can look at this on the <a href="https://view.qiime2.org/">Qiime2 viewer</a> by producing a Qiime-zipped visualization file, <code>.qzv</code>, from your now-demultiplexed <code>.qza</code> output:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" title="1">qiime demux summarize </a>
-<a class="sourceLine" id="cb12-2" title="2">  <span class="op">--</span>i<span class="op">-</span>data demux.qza </a>
-<a class="sourceLine" id="cb12-3" title="3">  <span class="op">--</span>o<span class="op">-</span>visualization demux.qzv</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ex">qiime</span> demux summarize \</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  --i-data demux.qza \</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  --o-visualization demux.qzv</a></code></pre></div>
 <p>From the interactive quality plot in <code>demux.qzv</code>, we can see the distribution of quality scores for each sequenced base. If analyzing paired-end data, you will see two plots: one for the forward read, and one for the reverse read. We use this visualization to inform how we will trim and truncate the ends of the reads in the next denoising step using <code>dada2 denoise-paired</code></p>
 </div>
 <div id="denoising-and-asv-generation" class="section level2">
 <h2><span class="header-section-number">5.3</span> Denoising and ASV generation</h2>
 <p>We will use the <a href="https://www.ncbi.nlm.nih.gov/pubmed/27214047">DADA2</a> algorithm to denoise our data and generate amplicon sequence variants (ASVs). DADA2 is a robust way to filter out noisy sequences, correct errors in marginal sequences, remove chimeras, remove singletons, join denoised paired-end reads, <em>and</em> dereplicate sequences. Previously, each of these functions would require separate commands, but DADA2 does it all-in-one. Therefore, this is a particularly computationally intense process. One should consider running <code>dada2</code> on a computer that can handle it (perhaps by accessing Northwestern’s high-performance computing cluster, <a href="https://www.it.northwestern.edu/research/user-services/quest/">Quest</a>).</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1">qiime dada2 denoise<span class="op">-</span>paired </a>
-<a class="sourceLine" id="cb13-2" title="2">  <span class="op">--</span>i<span class="op">-</span>demultiplexed<span class="op">-</span>seqs demux.qza </a>
-<a class="sourceLine" id="cb13-3" title="3">  <span class="op">--</span>p<span class="op">-</span>trim<span class="op">-</span>left<span class="op">-</span>f <span class="dv">13</span> </a>
-<a class="sourceLine" id="cb13-4" title="4">  <span class="op">--</span>p<span class="op">-</span>trim<span class="op">-</span>left<span class="op">-</span>r <span class="dv">13</span> </a>
-<a class="sourceLine" id="cb13-5" title="5">  <span class="op">--</span>p<span class="op">-</span>trunc<span class="op">-</span><span class="bu">len</span><span class="op">-</span>f <span class="dv">150</span> </a>
-<a class="sourceLine" id="cb13-6" title="6">  <span class="op">--</span>p<span class="op">-</span>trunc<span class="op">-</span><span class="bu">len</span><span class="op">-</span>r <span class="dv">150</span> </a>
-<a class="sourceLine" id="cb13-7" title="7">  <span class="op">--</span>o<span class="op">-</span>table table.qza </a>
-<a class="sourceLine" id="cb13-8" title="8">  <span class="op">--</span>o<span class="op">-</span>representative<span class="op">-</span>sequences rep<span class="op">-</span>seqs.qza </a>
-<a class="sourceLine" id="cb13-9" title="9">  <span class="op">--</span>o<span class="op">-</span>denoising<span class="op">-</span>stats denoising<span class="op">-</span>stats.qza</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ex">qiime</span> dada2 denoise-paired \</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  --i-demultiplexed-seqs demux.qza <span class="dt">\ </span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="ex">--p-trim-left-f</span> 13 \</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">  --p-trim-left-r 13 \</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">  --p-trunc-len-f 150 \</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">  --p-trunc-len-r 150 \</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">  --o-table table.qza \</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">  --o-representative-sequences rep-seqs.qza \</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">  --o-denoising-stats denoising-stats.qza</a></code></pre></div>
 <p>By inspecting the interactive <code>demux.qzv</code> file produced in the previous step on the <a href="https://view.qiime2.org/">Qiime2 viewer</a>, we observe that sequence quality scores are lower than average until base #14 in both the forward and reverse reads. We will want to trim these low-quality sequences from our data. Use the argument <code>p-trim</code> to specify the number of nucleotides that should be trimmed from the left end of the forward (<code>left-f</code>) and reverse (<code>left-r</code>) reads, which we define as <code>13</code> here. Similarly, the <code>p-trunc-len</code> argument is used to trim the right ends of, or <em>truncate</em>, our reads. Since we have paired-end data, our amplicons are 150 nucleotides long. We define <code>p-trunc-len</code> for the forward and reverse reads as <code>150</code> because we do not observe a drop off in quality scoring on their right ends in our <code>demux.qzv</code> file.</p>
 <p>The output <code>rep-seqs.qza</code> contains a list of the ASVs found across all samples, and be used in the next step of our processing workflow: assigning taxonomy.</p>
 </div>
@@ -254,56 +254,56 @@ Workflow for 16S amplicon sequence analysis in Qiime2
 <h2><span class="header-section-number">5.4</span> Taxonomy</h2>
 <p>At this point, our ASVs lack any meaningful identification - we don’t know whether ASV ‘A’ comes from the bacterium <em>E. coli</em> or the archaeum <em>S. solfataricus</em>! We determine who is present in our samples by assigning taxonomic IDs to each “query” sequence (from <code>rep-seqs.qza</code>). We do this by comparing query sequences to a database of known reference sequences ( <a href="https://www.arb-silva.de/documentation/silva-taxonomy/">Silva</a> is an excellent choice for our purposes). A major advantage of using Qiime2 is that it contains the <code>classify-sklearn</code> algorithm, which uses machine learning via Naive Bayes to classify sequences. As is the case with other machine learning applications, the classifier must be <em>trained</em>. Classifier training is required for every new reference database/amplicon pair, and would be the most resource-intensive step in our workflow by far. Luckily for us, Silva is routinely used to classify sequences coming from 16S rRNA gene amplification using the 515F/806R primers, and the Qiime2 developers provide a free, <a href="https://docs.qiime2.org/2019.10/data-resources/">pre-trained Silva classifier</a> in their documentation for just that! Download this classifier - you will need it! At the time this was written, I used <code>silva-132-99-515-806-nb-classifier-2018.qza</code>, the latest version of the pre-trained Silva classifier.</p>
 <p>Even without the extra training step, it is highly recommended to run <code>classify-sklearn</code> on a high-performance computing cluster, as it is very memory intensive and slow (budget several hours or even a day for this to complete!). Please refer to our Quest tutorial to get started on how to submit jobs on Northwestern’s cluster.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" title="1">qiime feature<span class="op">-</span>classifier classify<span class="op">-</span>sklearn </a>
-<a class="sourceLine" id="cb14-2" title="2">  <span class="op">--</span>i<span class="op">-</span>classifier classifier.qza</a>
-<a class="sourceLine" id="cb14-3" title="3">  <span class="op">--</span>i<span class="op">-</span>reads rep<span class="op">-</span>seqs.qza</a>
-<a class="sourceLine" id="cb14-4" title="4">  <span class="op">--</span>o<span class="op">-</span>classification taxonomy.qza</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ex">qiime</span> feature-classifier classify-sklearn \</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">  --i-classifier classifier.qza \</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">  --i-reads rep-seqs.qza \</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">  --o-classification taxonomy.qza</a></code></pre></div>
 <p>If you so choose, you can visualize the resultant taxonomy file on the <a href="https://view.qiime2.org/">Qiime 2 viewer</a> to verify that classification was successful:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb15-1" title="1">qiime metadata tabulate </a>
-<a class="sourceLine" id="cb15-2" title="2">  <span class="op">--</span>m<span class="op">-</span><span class="bu">input</span><span class="op">-</span><span class="bu">file</span> taxonomy.qza </a>
-<a class="sourceLine" id="cb15-3" title="3">  <span class="op">--</span>o<span class="op">-</span>visualization taxonomy.qzv</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ex">qiime</span> metadata tabulate \</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">  --m-input-file taxonomy.qza <span class="dt">\ </span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">  <span class="ex">--o-visualization</span> taxonomy.qzv</a></code></pre></div>
 </div>
 <div id="taxa-barplots-and-diversity-analyses-in-qiime2" class="section level2">
 <h2><span class="header-section-number">5.5</span> Taxa barplots and diversity analyses in Qiime2</h2>
 <p>You can quickly visualize the community composition of your samples via the <code>taxa barplot</code> command. This requires your clustered feature table and taxonomy.qza from the previous step as inputs. In the <a href="https://view.qiime2.org/">Qiime 2 viewer</a>, you can export the data that feeds the taxa barplot as .csv files specific to each level of taxonomic classification. Use those files in R to produce publication-quality figures.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" title="1">qiime taxa barplot </a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="op">--</span>i<span class="op">-</span>table table.qza </a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="op">--</span>i<span class="op">-</span>taxonomy taxonomy.qza </a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="op">--</span>m<span class="op">-</span>metadata<span class="op">-</span><span class="bu">file</span> metadata.tsv </a>
-<a class="sourceLine" id="cb16-5" title="5"><span class="op">--</span>o<span class="op">-</span>visualization taxa<span class="op">-</span>bar<span class="op">-</span>plots.qzv</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="ex">qiime</span> taxa barplot \</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">  --i-table table.qza \</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">  --i-taxonomy taxonomy.qza <span class="dt">\ </span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">  <span class="ex">--m-metadata-file</span> metadata.tsv <span class="dt">\ </span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">  <span class="ex">--o-visualization</span> taxa-bar-plots.qzv</a></code></pre></div>
 <p>In fact, we don’t really want to use Qiime2 for making any sort of figure for presentations or publications, but it does have a few handy tools to quickly visualize your data to inform which types of figures you want to make. Let’s start with the built-in diversity analyses offered by Qiime2.</p>
 <p>Many diversity analyses compute diversity by incorporating phylogeny. That means we have to generate a phylogenetic tree of how our sequences are related to each other! Both rooted and unrooted trees are outputs of the <code>align-to-tree-mafft-fasttree</code> command. UniFrac and Faith’s Phylogenetic Diverstiy require the use of a rooted tree.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" title="1">qiime phylogeny align<span class="op">-</span>to<span class="op">-</span>tree<span class="op">-</span>mafft<span class="op">-</span>fasttree </a>
-<a class="sourceLine" id="cb17-2" title="2">  <span class="op">--</span>i<span class="op">-</span>sequences rep<span class="op">-</span>seqs.qza </a>
-<a class="sourceLine" id="cb17-3" title="3">  <span class="op">--</span>o<span class="op">-</span>alignment aligned<span class="op">-</span>rep<span class="op">-</span>seqs.qza </a>
-<a class="sourceLine" id="cb17-4" title="4">  <span class="op">--</span>o<span class="op">-</span>masked<span class="op">-</span>alignment masked<span class="op">-</span>aligned<span class="op">-</span>rep<span class="op">-</span>seqs.qza </a>
-<a class="sourceLine" id="cb17-5" title="5">  <span class="op">--</span>o<span class="op">-</span>tree unrooted<span class="op">-</span>tree.qza </a>
-<a class="sourceLine" id="cb17-6" title="6">  <span class="op">--</span>o<span class="op">-</span>rooted<span class="op">-</span>tree rooted<span class="op">-</span>tree.qza</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="ex">qiime</span> phylogeny align-to-tree-mafft-fasttree \</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">  --i-sequences rep-seqs.qza \</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">  --o-alignment aligned-rep-seqs.qza \</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">  --o-masked-alignment masked-aligned-rep-seqs.qza \</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">  --o-tree unrooted-tree.qza \</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">  --o-rooted-tree rooted-tree.qza</a></code></pre></div>
 <p>Additionally, the analyses we are about to perform will be subsampling our data to estimate diversity. This <em>rarefaction</em> is done so we can compare diversity across samples of different sizes, thereby minimizing bias. We need to know the sequencing depth we should take so we don’t miss out on too many rare sequences (by choosing too low of a depth) or too many samples themselves (by choosing too high of a depth). By making an alpha rarefaction plot that we can visualize on the Qiime2 viewer, we can make an informed decision:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" title="1">qiime diversity alpha<span class="op">-</span>rarefaction </a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="op">--</span>i<span class="op">-</span>table table.qza </a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="op">--</span>i<span class="op">-</span>phylogeny rooted<span class="op">-</span>tree.qza </a>
-<a class="sourceLine" id="cb18-4" title="4"><span class="op">--</span>p<span class="op">-</span><span class="bu">max</span><span class="op">-</span>depth <span class="dv">20000</span> </a>
-<a class="sourceLine" id="cb18-5" title="5"><span class="op">--</span>m<span class="op">-</span>metadata<span class="op">-</span><span class="bu">file</span> metadata.tsv</a>
-<a class="sourceLine" id="cb18-6" title="6"><span class="op">--</span>o<span class="op">-</span>visualization alpha<span class="op">-</span>rarefaction.qzv</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="ex">qiime</span> diversity alpha-rarefaction \</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  --i-table table.qza \</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">  --i-phylogeny rooted-tree.qza \</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">  --p-max-depth 20000 \</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">  --m-metadata-file metadata.tsv \</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">  --o-visualization alpha-rarefaction.qzv</a></code></pre></div>
 <p>From this visualization, you should choose a sequencing depth at which the observed OTUs from most samples level off, without excluding too many samples. In our example, we will choose a depth of 6500.</p>
 <p>After determining the degree of rarefaction, we can compute core diversity metrics in Qiime2:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb19-1" title="1">qiime diversity core<span class="op">-</span>metrics<span class="op">-</span>phylogenetic </a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="op">--</span>i<span class="op">-</span>phylogeny rooted<span class="op">-</span>tree.qza </a>
-<a class="sourceLine" id="cb19-3" title="3"><span class="op">--</span>i<span class="op">-</span>table table.qza </a>
-<a class="sourceLine" id="cb19-4" title="4"><span class="op">--</span>p<span class="op">-</span>sampling<span class="op">-</span>depth <span class="dv">6500</span> </a>
-<a class="sourceLine" id="cb19-5" title="5"><span class="op">--</span>m<span class="op">-</span>metadata<span class="op">-</span><span class="bu">file</span> metadata.tsv</a>
-<a class="sourceLine" id="cb19-6" title="6"><span class="op">--</span>output<span class="op">-</span><span class="bu">dir</span> core<span class="op">-</span>metrics<span class="op">-</span>results</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="ex">qiime</span> diversity core-metrics-phylogenetic \</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">  --i-phylogeny rooted-tree.qza \</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">  --i-table table.qza \</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">  --p-sampling-depth 6500 \</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">  --m-metadata-file metadata.tsv \</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">  --output-dir core-metrics-results</a></code></pre></div>
 <p>The <code>core-metrics-results</code> folder will contain both alpha and beta diversity metrics. For each metric, you can determine diversity significance using <code>diversity alpha-group-significance</code> or <code>diversity beta-group-significance</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb20-1" title="1">qiime diversity alpha<span class="op">-</span>group<span class="op">-</span>significance </a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="op">--</span>i<span class="op">-</span>alpha<span class="op">-</span>diversity core<span class="op">-</span>metrics<span class="op">-</span>results<span class="op">/</span>alpha<span class="op">-</span>div<span class="op">-</span>metric<span class="op">-</span>of<span class="op">-</span>interest.qza </a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="op">--</span>m<span class="op">-</span>metadata<span class="op">-</span><span class="bu">file</span> metadata.tsv </a>
-<a class="sourceLine" id="cb20-4" title="4"><span class="op">--</span>o<span class="op">-</span>visualization core<span class="op">-</span>metrics<span class="op">-</span>results<span class="op">/</span>metric<span class="op">-</span>group<span class="op">-</span>significance.qzv</a></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb21-1" title="1">qiime diversity beta<span class="op">-</span>group<span class="op">-</span>significance </a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="op">--</span>i<span class="op">-</span>distance<span class="op">-</span>matrix core<span class="op">-</span>metrics<span class="op">-</span>results<span class="op">/</span>distance_matrix.qza </a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="op">--</span>m<span class="op">-</span>metadata<span class="op">-</span><span class="bu">file</span> metadata.tsv </a>
-<a class="sourceLine" id="cb21-4" title="4"><span class="op">--</span>m<span class="op">-</span>metadata<span class="op">-</span>column comparisonofinterest </a>
-<a class="sourceLine" id="cb21-5" title="5"><span class="op">--</span>o<span class="op">-</span>visualization core<span class="op">-</span>metrics<span class="op">-</span>results<span class="op">/</span>unweighted<span class="op">-</span>unifrac<span class="op">-</span>comparisonofinterest<span class="op">-</span>significance.qzv</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="ex">qiime</span> diversity alpha-group-significance \</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  --i-alpha-diversity core-metrics-results/alpha-div-metric-of-interest.qza \</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">  --m-metadata-file metadata.tsv \</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">  --o-visualization core-metrics-results/metric-group-significance.qzv</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ex">qiime</span> diversity beta-group-significance \</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">  --i-distance-matrix core-metrics-results/distance_matrix.qza \</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">  --m-metadata-file metadata.tsv \</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">  --m-metadata-column comparisonofinterest \</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">  --o-visualization core-metrics-results/unweighted-unifrac-comparisonofinterest-significance.qzv</a></code></pre></div>
 <p>Beta diversity visualizations can be viewed via Qiime2 View’s Emperor, which offers an interactive three-dimensional platform to explore relationships in your data.</p>
 
 </div>

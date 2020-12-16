@@ -9,10 +9,10 @@
 
 This protocol is designed for the processing of 16S rRNA gene amplicon data using 515F/806R primers. Qiime2 requires us to convert the raw data the sequencing center sends us into Qiime-zipped artifacts, or a ```.qza``` extension. We must first import our data (paired-end .fastq files) into this format:
 
-```{python, echo=TRUE, eval=FALSE}
-qiime tools import 
-  --type EMPPairedEndSequences 
-  --input-path emp-paired-end-sequences 
+```{bash, echo=TRUE, eval=FALSE}
+qiime tools import \
+  --type EMPPairedEndSequences \
+  --input-path emp-paired-end-sequences \
   --output-path emp-paired-end-sequences.qza
 ```
 
@@ -28,11 +28,11 @@ In Qiime2, we need to create a metadata file that contains the barcodes used for
 
 Because we are demultiplexing EMP paired-end sequences, we should use the ```demux emp-paired``` command. The column which contains the barcode in the metadata file for each sample must be specified using the argument ```barcodes-column```:
 
-```{python, echo=TRUE, eval=FALSE}
-qiime demux emp-paired 
-  --m-barcodes-file sample-metadata.tsv 
-  --m-barcodes-column barcode-sequence 
-  --i-seqs emp-paired-end-sequences.qza 
+```{bash, echo=TRUE, eval=FALSE}
+qiime demux emp-paired \
+  --m-barcodes-file sample-metadata.tsv \
+  --m-barcodes-column barcode-sequence \
+  --i-seqs emp-paired-end-sequences.qza \
   --o-per-sample-sequences demux.qza 
 ```
 
@@ -40,9 +40,9 @@ Note: if you have reverse complement sequences, you must pass the argument, ```-
 
 You can look at this on the [Qiime2 viewer](https://view.qiime2.org/) by producing a Qiime-zipped visualization file, ```.qzv```, from your now-demultiplexed ```.qza``` output:
 
-```{python, echo=TRUE, eval=FALSE}
-qiime demux summarize 
-  --i-data demux.qza 
+```{bash, echo=TRUE, eval=FALSE}
+qiime demux summarize \
+  --i-data demux.qza \
   --o-visualization demux.qzv
 ```
 
@@ -52,15 +52,15 @@ From the interactive quality plot in ```demux.qzv```, we can see the distributio
 
 We will use the [DADA2](https://www.ncbi.nlm.nih.gov/pubmed/27214047) algorithm to denoise our data and generate amplicon sequence variants (ASVs). DADA2 is a robust way to filter out noisy sequences, correct errors in marginal sequences, remove chimeras, remove singletons, join denoised paired-end reads, *and* dereplicate sequences. Previously, each of these functions would require separate commands, but DADA2 does it all-in-one. Therefore, this is a particularly computationally intense process. One should consider running ```dada2``` on a computer that can handle it (perhaps by accessing Northwestern's high-performance computing cluster, [Quest](https://www.it.northwestern.edu/research/user-services/quest/)).
 
-```{python, echo=TRUE, eval=FALSE}
-qiime dada2 denoise-paired 
-  --i-demultiplexed-seqs demux.qza 
-  --p-trim-left-f 13 
-  --p-trim-left-r 13 
-  --p-trunc-len-f 150 
-  --p-trunc-len-r 150 
-  --o-table table.qza 
-  --o-representative-sequences rep-seqs.qza 
+```{bash, echo=TRUE, eval=FALSE}
+qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs demux.qza \ 
+  --p-trim-left-f 13 \
+  --p-trim-left-r 13 \
+  --p-trunc-len-f 150 \
+  --p-trunc-len-r 150 \
+  --o-table table.qza \
+  --o-representative-sequences rep-seqs.qza \
   --o-denoising-stats denoising-stats.qza
 ```
 
@@ -74,18 +74,18 @@ At this point, our ASVs lack any meaningful identification - we don't know wheth
 
 Even without the extra training step, it is highly recommended to run ```classify-sklearn``` on a high-performance computing cluster, as it is very memory intensive and slow (budget several hours or even a day for this to complete!). Please refer to our Quest tutorial to get started on how to submit jobs on Northwestern's cluster.
 
-```{python, echo=TRUE, eval=FALSE}
-qiime feature-classifier classify-sklearn 
-  --i-classifier classifier.qza
-  --i-reads rep-seqs.qza
+```{bash, echo=TRUE, eval=FALSE}
+qiime feature-classifier classify-sklearn \
+  --i-classifier classifier.qza \
+  --i-reads rep-seqs.qza \
   --o-classification taxonomy.qza
 ```
 
 If you so choose, you can visualize the resultant taxonomy file on the [Qiime 2 viewer](https://view.qiime2.org/) to verify that classification was successful:
 
-```{python, echo=TRUE, eval=FALSE}
-qiime metadata tabulate 
-  --m-input-file taxonomy.qza 
+```{bash, echo=TRUE, eval=FALSE}
+qiime metadata tabulate \
+  --m-input-file taxonomy.qza \ 
   --o-visualization taxonomy.qzv
 ```
 
@@ -93,66 +93,66 @@ qiime metadata tabulate
 
 You can quickly visualize the community composition of your samples via the ```taxa barplot``` command. This requires your clustered feature table and taxonomy.qza from the previous step as inputs. In the [Qiime 2 viewer](https://view.qiime2.org/), you can export the data that feeds the taxa barplot as .csv files specific to each level of taxonomic classification. Use those files in R to produce publication-quality figures. 
 
-```{python, echo=TRUE, eval=FALSE}
-qiime taxa barplot 
---i-table table.qza 
---i-taxonomy taxonomy.qza 
---m-metadata-file metadata.tsv 
---o-visualization taxa-bar-plots.qzv
+```{bash, echo=TRUE, eval=FALSE}
+qiime taxa barplot \
+  --i-table table.qza \
+  --i-taxonomy taxonomy.qza \ 
+  --m-metadata-file metadata.tsv \ 
+  --o-visualization taxa-bar-plots.qzv
 ```
 
 In fact, we don't really want to use Qiime2 for making any sort of figure for presentations or publications, but it does have a few handy tools to quickly visualize your data to inform which types of figures you want to make. Let's start with the built-in diversity analyses offered by Qiime2.
 
 Many diversity analyses compute diversity by incorporating phylogeny. That means we have to generate a phylogenetic tree of how our sequences are related to each other! Both rooted and unrooted trees are outputs of the  ```align-to-tree-mafft-fasttree``` command. UniFrac and Faith's Phylogenetic Diverstiy require the use of a rooted tree. 
 
-```{python, echo=TRUE, eval=FALSE}
-qiime phylogeny align-to-tree-mafft-fasttree 
-  --i-sequences rep-seqs.qza 
-  --o-alignment aligned-rep-seqs.qza 
-  --o-masked-alignment masked-aligned-rep-seqs.qza 
-  --o-tree unrooted-tree.qza 
+```{bash, echo=TRUE, eval=FALSE}
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences rep-seqs.qza \
+  --o-alignment aligned-rep-seqs.qza \
+  --o-masked-alignment masked-aligned-rep-seqs.qza \
+  --o-tree unrooted-tree.qza \
   --o-rooted-tree rooted-tree.qza
 ```
 
 Additionally, the analyses we are about to perform will be subsampling our data to estimate diversity. This *rarefaction* is done so we can compare diversity across samples of different sizes, thereby minimizing bias. We need to know the sequencing depth we should take so we don't miss out on too many rare sequences (by choosing too low of a depth) or too many samples themselves (by choosing too high of a depth). By making an alpha rarefaction plot that we can visualize on the Qiime2 viewer, we can make an informed decision:
 
-```{python, echo=TRUE, eval=FALSE}
-qiime diversity alpha-rarefaction 
---i-table table.qza 
---i-phylogeny rooted-tree.qza 
---p-max-depth 20000 
---m-metadata-file metadata.tsv
---o-visualization alpha-rarefaction.qzv
+```{bash, echo=TRUE, eval=FALSE}
+qiime diversity alpha-rarefaction \
+  --i-table table.qza \
+  --i-phylogeny rooted-tree.qza \
+  --p-max-depth 20000 \
+  --m-metadata-file metadata.tsv \
+  --o-visualization alpha-rarefaction.qzv
 ```
 
 From this visualization, you should choose a sequencing depth at which the observed OTUs from most samples level off, without excluding too many samples. In our example, we will choose a depth of 6500.
 
 After determining the degree of rarefaction, we can compute core diversity metrics in Qiime2:
 
-```{python, echo=TRUE, eval=FALSE}
-qiime diversity core-metrics-phylogenetic 
---i-phylogeny rooted-tree.qza 
---i-table table.qza 
---p-sampling-depth 6500 
---m-metadata-file metadata.tsv
---output-dir core-metrics-results
+```{bash, echo=TRUE, eval=FALSE}
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table table.qza \
+  --p-sampling-depth 6500 \
+  --m-metadata-file metadata.tsv \
+  --output-dir core-metrics-results
 ```
 
 The ```core-metrics-results``` folder will contain both alpha and beta diversity metrics. For each metric, you can determine diversity significance using ``` diversity alpha-group-significance``` or ```diversity beta-group-significance```:
 
-```{python, echo=TRUE, eval=FALSE}
-qiime diversity alpha-group-significance 
---i-alpha-diversity core-metrics-results/alpha-div-metric-of-interest.qza 
---m-metadata-file metadata.tsv 
---o-visualization core-metrics-results/metric-group-significance.qzv
+```{bash, echo=TRUE, eval=FALSE}
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics-results/alpha-div-metric-of-interest.qza \
+  --m-metadata-file metadata.tsv \
+  --o-visualization core-metrics-results/metric-group-significance.qzv
 ```
 
-```{python, echo=TRUE, eval=FALSE}
-qiime diversity beta-group-significance 
---i-distance-matrix core-metrics-results/distance_matrix.qza 
---m-metadata-file metadata.tsv 
---m-metadata-column comparisonofinterest 
---o-visualization core-metrics-results/unweighted-unifrac-comparisonofinterest-significance.qzv
+```{bash, echo=TRUE, eval=FALSE}
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics-results/distance_matrix.qza \
+  --m-metadata-file metadata.tsv \
+  --m-metadata-column comparisonofinterest \
+  --o-visualization core-metrics-results/unweighted-unifrac-comparisonofinterest-significance.qzv
 ```
 
 Beta diversity visualizations can be viewed via Qiime2 View's Emperor, which offers an interactive three-dimensional platform to explore relationships in your data.
