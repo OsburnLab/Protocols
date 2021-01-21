@@ -1,0 +1,93 @@
+# | Functional Gene Annotation with METABOLIC {#metabolic}
+<font size="1">**Created by:** Caitlin Casar on 2021-01-20 </br>
+**Last updated:** 2021-01-20 </font>
+
+This is a protocol for annotating your metagenome or binned genome data with [METABOLIC](https://github.com/AnantharamanLab/METABOLIC){target="_blank"}.
+
+
+First you will need to install METABOLIC on Quest. Save the following to a .sh file to your home directory and run as a batch job on Quest:
+```{bash, eval=FALSE}
+module load anaconda3
+
+# create env
+conda create -n metabolic
+source activate metabolic
+
+# conda install the required tools
+conda install sambamba
+conda install bamtools
+conda install coverm # installs perl 5.32
+conda install gtdbtk
+conda install diamond
+conda install bowtie2
+conda install R=3.6.0
+
+# conda install R dependencies
+conda install r-tidyverse=1.3.0
+conda install r-diagram
+conda install r-ggthemes
+conda install r-ggalluvial
+conda install r-ggraph
+conda install r-openxlsx
+conda install r-pdftools
+
+# conda install perl dependencies
+conda install perl-data-dumper # downgrades perl to 5.26.2
+conda install perl-excel-writer-xlsx
+conda install perl-posix
+conda install perl-getopt-long
+conda install perl-statistics-descriptive
+conda install perl-bioperl
+
+# get the one pesky perl dependency not available through conda
+conda install perl-app-cpanminus
+env PERL5LIB="" PERL_LOCAL_LIB_ROOT="" PERL_MM_OPT="" PERL_MB_OPT="" cpanm Array::Split
+
+#conda install gdown
+conda install gdown
+
+# conda install the perl package to solve the first (and so far only) error
+conda install perl-parallel-forkmanager
+
+#clone github repo
+git clone https://github.com/AnantharamanLab/METABOLIC.git
+
+#run setup script - make sure you are working from your metabolic conda environment or this script will fail
+cd METABOLIC
+sh run_to_setup.sh
+
+#test installation - this is optional but good for troubleshooting installation errors
+perl /home/cpc7770/METABOLIC/METABOLIC-G.pl -test true
+perl /home/cpc7770/METABOLIC/METABOLIC-C.pl -test true
+```
+
+Now you're ready to run METABOLIC on your metagenome data. If you want to run it on unbinned metagenome data, follow this example batch script. Note that for `METABOLIC-G.pl` you only need to specify the input and output directory. You can run it on either nucleotide files with a `.fasta` extension, or amino acid files with a `.faa` extension.
+
+```{bash, eval=FALSE}
+module load anaconda3
+source activate metabolic
+
+#run on metagenomes - note that the file extensions MUST be '.fasta', '.fa' is not acceptable.
+perl /home/cpc7770/METABOLIC/METABOLIC-G.pl -in-gn /projects/p30777/metagenome_data/contigs -o /projects/p30777/metagenome_data/metabolic_metagenome_annotations
+```
+
+Wanna run it on binned genomes? Use the `METABOLIC-C.pl` script. Note that for this script you need to specify the paired read files. You can run the following as a batch job on Quest: 
+```{bash, eval=FALSE}
+#run on binned genomes
+
+#rename from .fa to .fasta
+#cd /projects/p30777/metagenome_data/genomes
+#find . -name "*.fa" -exec rename .fa .fasta {} +
+
+
+#run on metagenomes - note that the file extensions MUST be '.fasta', '.fa' is not acceptable.
+#loop over directories 
+for path in /projects/p30777/metagenome_data/genomes/*; do
+    [ -d "${path}" ] || continue # if not a directory, skip
+    dirname="$(basename "${path}")"
+    echo annotating $dirname genomes...
+    perl ~/METABOLIC/METABOLIC-C.pl -in-gn $path  -r /projects/p30777/metagenome_data/reads/$dirname -o /projects/p30777/metagenome_data/metabolic_genome_annotations/$dirname
+done
+
+echo done!
+```
